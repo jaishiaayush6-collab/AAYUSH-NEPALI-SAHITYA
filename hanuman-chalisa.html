@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>श्री हनुमान चालीसा</title>
+
+<style>
+:root{
+ --bg:#fff4e8;
+ --card:#ffffff;
+ --text:#42210b;
+ --primary:#e65b12;
+ --accent:#ffb52e;
+ --muted:#956b50;
+ --shadow:0 5px 22px #8a431522;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:"Noto Sans Devanagari","Mangal",sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ transition:.3s;
+}
+body[data-theme="dark"]{
+ --bg:#171717;--card:#252525;--text:#fff0dc;
+ --primary:#ff923c;--accent:#ffc05a;--muted:#c7ad98;
+ --shadow:0 5px 22px #0005;
+}
+body[data-theme="red"]{
+ --bg:#fff0f0;--card:#fff;--text:#651313;
+ --primary:#bd2020;--accent:#ff7777;--muted:#976060;
+}
+body[data-theme="green"]{
+ --bg:#eaf6eb;--card:#fff;--text:#17452c;
+ --primary:#23834c;--accent:#91ce85;--muted:#63866c;
+}
+body[data-theme="blue"]{
+ --bg:#edf4ff;--card:#fff;--text:#18345c;
+ --primary:#2864b5;--accent:#77b7ed;--muted:#667f9e;
+}
+header{
+ background:linear-gradient(135deg,var(--primary),#a62b12);
+ color:white;text-align:center;padding:30px 15px;
+}
+header .symbol{font-size:48px}
+header h1{margin:8px 0;font-size:29px}
+header p{margin:5px;font-size:14px}
+.container{max-width:950px;margin:auto;padding:18px}
+.topbar{
+ display:flex;justify-content:space-between;
+ align-items:center;gap:10px;flex-wrap:wrap;
+ margin-bottom:18px;
+}
+select,input,button{
+ font-family:inherit;font-size:15px;
+}
+select,input{
+ padding:12px;border:1px solid #ddd;
+ border-radius:10px;background:var(--card);
+ color:var(--text);
+}
+input{width:100%;margin-bottom:15px}
+.tabs{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:9px;margin-bottom:18px;
+}
+.tabs button{
+ background:var(--card);color:var(--text);
+ border:1px solid var(--primary);
+ border-radius:12px;padding:14px 5px;
+ cursor:pointer;font-weight:bold;
+}
+.tabs button.active{
+ background:var(--primary);color:white;
+}
+.panel{
+ display:none;background:var(--card);
+ border-radius:16px;padding:20px;
+ box-shadow:var(--shadow);
+}
+.panel.active{display:block}
+.section-title{
+ color:var(--primary);text-align:center;
+ font-size:23px;margin:5px 0 20px;
+}
+.verse{
+ background:var(--bg);border-left:4px solid var(--primary);
+ border-radius:9px;padding:15px;margin:12px 0;
+ line-height:2.1;font-size:17px;
+ white-space:pre-line;
+}
+.verse strong{color:var(--primary)}
+.actions{
+ display:flex;gap:8px;flex-wrap:wrap;margin-top:15px;
+}
+.btn{
+ background:var(--primary);color:white;
+ border:0;border-radius:9px;padding:11px 15px;
+ cursor:pointer;
+}
+.btn.secondary{background:#777}
+.mantra{text-align:center;font-size:19px}
+.mantra small{display:block;color:var(--muted);font-size:13px}
+footer{
+ text-align:center;padding:25px;color:var(--muted);
+}
+.hidden{display:none!important}
+@media(max-width:550px){
+ header h1{font-size:23px}
+ .container{padding:12px}
+ .panel{padding:13px}
+ .verse{font-size:16px}
+ .tabs button{font-size:13px}
+}
+</style>
+</head>
+
+<body data-theme="light">
+
+<header>
+ <div class="symbol">🚩🙏</div>
+ <h1>॥ श्री हनुमान चालीसा ॥</h1>
+ <p>जय श्री राम | जय बजरंगबली</p>
+ <p>हनुमान जीको भक्ति संग्रह</p>
+</header>
+
+<div class="container">
+
+ <div class="topbar">
+  <strong>🎨 Theme परिवर्तन</strong>
+  <select id="theme" onchange="changeTheme()">
+   <option value="light">🟠 भगवा Theme</option>
+   <option value="dark">🌙 Dark Theme</option>
+   <option value="red">🔴 Red Theme</option>
+   <option value="green">🌿 Green Theme</option>
+   <option value="blue">🔵 Blue Theme</option>
+  </select>
+ </div>
+
+ <input id="search" type="text"
+ placeholder="🔍 चालीसा, आरती वा मन्त्र खोज्नुहोस्..."
+ oninput="searchContent()">
+
+ <div class="tabs">
+  <button class="active" onclick="showTab('chalisa',this)">🚩 हनुमान चालीसा</button>
+  <button onclick="showTab('aarti',this)">🪔 हनुमान आरती</button>
+  <button onclick="showTab('mantra',this)">📿 हनुमान मन्त्र</button>
+ </div>
+
+ <!-- HANUMAN CHALISA -->
+
+ <section id="chalisa" class="panel active">
+  <h2 class="section-title">🚩 श्री हनुमान चालीसा 🚩</h2>
+  <div id="chalisaContent">
+
+<div class="verse">
+॥ दोहा ॥
+
+श्रीगुरु चरन सरोज रज, निज मनु मुकुरु सुधारि।
+बरनउँ रघुबर बिमल जसु, जो दायकु फल चारि॥
+
+बुद्धिहीन तनु जानिके, सुमिरौं पवन-कुमार।
+बल बुधि विद्या देहु मोहिं, हरहु कलेस बिकार॥
+</div>
+
+<div class="verse">॥ चौपाई ॥
+
+जय हनुमान ज्ञान गुन सागर।
+जय कपीस तिहुँ लोक उजागर॥ <strong>॥१॥</strong></div>
+
+<div class="verse">राम दूत अतुलित बल धामा।
+अंजनि-पुत्र पवनसुत नामा॥ <strong>॥२॥</strong></div>
+
+<div class="verse">महाबीर बिक्रम बजरंगी।
+कुमति निवार सुमति के संगी॥ <strong>॥३॥</strong></div>
+
+<div class="verse">कंचन बरन बिराज सुबेसा।
+कानन कुंडल कुंचित केसा॥ <strong>॥४॥</strong></div>
+
+<div class="verse">हाथ बज्र औ ध्वजा बिराजै।
+काँधे मूँज जनेऊ साजै॥ <strong>॥५॥</strong></div>
+
+<div class="verse">शंकर सुवन केसरी नंदन।
+तेज प्रताप महा जग वंदन॥ <strong>॥६॥</strong></div>
+
+<div class="verse">विद्यावान गुनी अति चातुर।
+राम काज करिबे को आतुर॥ <strong>॥७॥</strong></div>
+
+<div class="verse">प्रभु चरित्र सुनिबे को रसिया।
+राम लखन सीता मन बसिया॥ <strong>॥८॥</strong></div>
+
+<div class="verse">सूक्ष्म रूप धरि सियहिं दिखावा।
+विकट रूप धरि लंक जरावा॥ <strong>॥९॥</strong></div>
+
+<div class="verse">भीम रूप धरि असुर सँहारे।
+रामचंद्र के काज सँवारे॥ <strong>॥१०॥</strong></div>
+
+<div class="verse">लाय सजीवन लखन जियाये।
+श्रीरघुबीर हरषि उर लाये॥ <strong>॥११॥</strong></div>
+
+<div class="verse">रघुपति कीन्ही बहुत बड़ाई।
+तुम मम प्रिय भरतहि सम भाई॥ <strong>॥१२॥</strong></div>
+
+<div class="verse">सहस बदन तुम्हरो जस गावैं।
+अस कहि श्रीपति कंठ लगावैं॥ <strong>॥१३॥</strong></div>
+
+<div class="verse">सनकादिक ब्रह्मादि मुनीसा।
+नारद सारद सहित अहीसा॥ <strong>॥१४॥</strong></div>
+
+<div class="verse">जम कुबेर दिगपाल जहाँ ते।
+कवि कोविद कहि सके कहाँ ते॥ <strong>॥१५॥</strong></div>
+
+<div class="verse">तुम उपकार सुग्रीवहिं कीन्हा।
+राम मिलाय राज पद दीन्हा॥ <strong>॥१६॥</strong></div>
+
+<div class="verse">तुम्हरो मंत्र विभीषण माना।
+लंकेश्वर भए सब जग जाना॥ <strong>॥१७॥</strong></div>
+
+<div class="verse">जुग सहस्र जोजन पर भानू।
+लील्यो ताहि मधुर फल जानू॥ <strong>॥१८॥</strong></div>
+
+<div class="verse">प्रभु मुद्रिका मेलि मुख माहीं।
+जलधि लाँघि गये अचरज नाहीं॥ <strong>॥१९॥</strong></div>
+
+<div class="verse">दुर्गम काज जगत के जेते।
+सुगम अनुग्रह तुम्हरे तेते॥ <strong>॥२०॥</strong></div>
+
+<div class="verse">राम दुआरे तुम रखवारे।
+होत न आज्ञा बिनु पैसारे॥ <strong>॥२१॥</strong></div>
+
+<div class="verse">सब सुख लहै तुम्हारी सरना।
+तुम रक्षक काहू को डरना॥ <strong>॥२२॥</strong></div>
+
+<div class="verse">आपन तेज सम्हारो आपै।
+तीनों लोक हाँक तें काँपै॥ <strong>॥२३॥</strong></div>
+
+<div class="verse">भूत पिशाच निकट नहिं आवै।
+महावीर जब नाम सुनावै॥ <strong>॥२४॥</strong></div>
+
+<div class="verse">नासै रोग हरै सब पीरा।
+जपत निरंतर हनुमत बीरा॥ <strong>॥२५॥</strong></div>
+
+<div class="verse">संकट तें हनुमान छुड़ावै।
+मन क्रम वचन ध्यान जो लावै॥ <strong>॥२६॥</strong></div>
+
+<div class="verse">सब पर राम तपस्वी राजा।
+तिनके काज सकल तुम साजा॥ <strong>॥२७॥</strong></div>
+
+<div class="verse">और मनोरथ जो कोई लावै।
+सोइ अमित जीवन फल पावै॥ <strong>॥२८॥</strong></div>
+
+<div class="verse">चारों जुग परताप तुम्हारा।
+है परसिद्ध जगत उजियारा॥ <strong>॥२९॥</strong></div>
+
+<div class="verse">साधु संत के तुम रखवारे।
+असुर निकंदन राम दुलारे॥ <strong>॥३०॥</strong></div>
+
+<div class="verse">अष्ट सिद्धि नौ निधि के दाता।
+अस बर दीन जानकी माता॥ <strong>॥३१॥</strong></div>
+
+<div class="verse">राम रसायन तुम्हरे पासा।
+सदा रहो रघुपति के दासा॥ <strong>॥३२॥</strong></div>
+
+<div class="verse">तुम्हरे भजन राम को पावै।
+जनम जनम के दुख बिसरावै॥ <strong>॥३३॥</strong></div>
+
+<div class="verse">अंत काल रघुबर पुर जाई।
+जहाँ जन्म हरिभक्त कहाई॥ <strong>॥३४॥</strong></div>
+
+<div class="verse">और देवता चित्त न धरई।
+हनुमत सेइ सर्व सुख करई॥ <strong>॥३५॥</strong></div>
+
+<div class="verse">संकट कटै मिटै सब पीरा।
+जो सुमिरै हनुमत बलबीरा॥ <strong>॥३६॥</strong></div>
+
+<div class="verse">जय जय जय हनुमान गोसाईं।
+कृपा करहु गुरुदेव की नाईं॥ <strong>॥३७॥</strong></div>
+
+<div class="verse">जो सत बार पाठ कर कोई।
+छूटहि बंदि महा सुख होई॥ <strong>॥३८॥</strong></div>
+
+<div class="verse">जो यह पढ़ै हनुमान चालीसा।
+होय सिद्धि साखी गौरीसा॥ <strong>॥३९॥</strong></div>
+
+<div class="verse">तुलसीदास सदा हरि चेरा।
+कीजै नाथ हृदय महँ डेरा॥ <strong>॥४०॥</strong></div>
+
+<div class="verse">
+॥ समापन दोहा ॥
+
+पवन तनय संकट हरन, मंगल मूरति रूप।
+राम लखन सीता सहित, हृदय बसहु सुर भूप॥
+</div>
+
+  </div>
+
+  <div class="actions">
+   <button class="btn" onclick="copySection('chalisaContent')">📋 Copy चालीसा</button>
+   <button class="btn secondary" onclick="window.print()">🖨️ Print</button>
+  </div>
+ </section>
+
+ <!-- HANUMAN AARTI -->
+
+ <section id="aarti" class="panel">
+  <h2 class="section-title">🪔 श्री हनुमान जी की आरती</h2>
+
+  <div id="aartiContent">
+
+<div class="verse">
+आरती कीजै हनुमान लला की।
+दुष्ट दलन रघुनाथ कला की॥
+
+जाके बल से गिरिवर काँपे।
+रोग दोष जाके निकट न झाँके॥
+
+अंजनि पुत्र महा बलदाई।
+संतन के प्रभु सदा सहाई॥
+
+दे बीरा रघुनाथ पठाए।
+लंका जारि सिया सुधि लाए॥
+
+लंका सो कोट समुद्र सी खाई।
+जात पवनसुत बार न लाई॥
+
+लंका जारि असुर संहारे।
+सियारामजी के काज सँवारे॥
+
+लक्ष्मण मूर्छित पड़े सकारे।
+आनि संजीवन प्राण उबारे॥
+
+पैठि पाताल तोरि जमकारे।
+अहिरावण की भुजा उखारे॥
+
+बाएँ भुजा असुर दल मारे।
+दाहिने भुजा संतजन तारे॥
+
+सुर नर मुनि आरती उतारें।
+जय जय जय हनुमान उचारें॥
+
+कंचन थार कपूर लौ छाई।
+आरती करत अंजना माई॥
+
+जो हनुमानजी की आरती गावै।
+बसि बैकुंठ परम पद पावै॥
+
+लंक विध्वंस किए रघुराई।
+तुलसीदास प्रभु कीर्ति गाई॥
+
+आरती कीजै हनुमान लला की।
+दुष्ट दलन रघुनाथ कला की॥
+</div>
+
+  </div>
+
+  <div class="actions">
+   <button class="btn" onclick="copySection('aartiContent')">📋 Copy आरती</button>
+  </div>
+ </section>
+
+ <!-- HANUMAN MANTRA -->
+
+ <section id="mantra" class="panel">
+  <h2 class="section-title">📿 श्री हनुमान जी के मन्त्र</h2>
+
+  <div id="mantraContent">
+
+<div class="verse mantra">
+<strong>१. हनुमान मूल मन्त्र</strong>
+ॐ श्री हनुमते नमः॥
+<small>Om Shri Hanumate Namah</small>
+</div>
+
+<div class="verse mantra">
+<strong>२. हनुमान बीज मन्त्र</strong>
+ॐ ऐं भ्रीम हनुमते,
+श्री राम दूताय नमः॥
+<small>Om Aim Bhreem Hanumate Shri Ram Dootaya Namah</small>
+</div>
+
+<div class="verse mantra">
+<strong>३. अञ्जनेय मन्त्र</strong>
+ॐ अञ्जनेयाय विद्महे,
+वायुपुत्राय धीमहि।
+तन्नो हनुमत् प्रचोदयात्॥
+</div>
+
+<div class="verse mantra">
+<strong>४. हनुमान ध्यान मन्त्र</strong>
+मनोजवं मारुततुल्यवेगं,
+जितेन्द्रियं बुद्धिमतां वरिष्ठम्।
+वातात्मजं वानरयूथमुख्यं,
+श्रीरामदूतं शरणं प्रपद्ये॥
+</div>
+
+<div class="verse mantra">
+<strong>५. हनुमान स्तुति मन्त्र</strong>
+अतुलितबलधामं हेमशैलाभदेहं,
+दनुजवनकृशानुं ज्ञानिनामग्रगण्यम्।
+सकलगुणनिधानं वानराणामधीशं,
+रघुपतिप्रियभक्तं वातजातं नमामि॥
+</div>
+
+<div class="verse mantra">
+<strong>६. रामदूत मन्त्र</strong>
+ॐ रामदूताय नमः॥
+</div>
+
+<div class="verse mantra">
+<strong>७. बजरंगबली मन्त्र</strong>
+ॐ हं हनुमते रुद्रात्मकाय हुं फट्॥
+</div>
+
+<div class="verse mantra">
+<strong>८. पवनपुत्र मन्त्र</strong>
+ॐ पवनपुत्राय नमः॥
+</div>
+
+<div class="verse mantra">
+<strong>९. अञ्जनीसुत मन्त्र</strong>
+ॐ अञ्जनीसुताय नमः॥
+</div>
+
+<div class="verse mantra">
+<strong>१०. श्री हनुमान नाम मन्त्र</strong>
+श्री हनुमते नमो नमः।
+जय जय हनुमते नमः॥
+</div>
+
+  </div>
+
+  <div class="actions">
+   <button class="btn" onclick="copySection('mantraContent')">📋 Copy सबै मन्त्र</button>
+  </div>
+ </section>
+
+</div>
+
+<footer>
+ <div style="font-size:30px">🚩🙏🚩</div>
+ <h3>जय श्री राम । जय हनुमान</h3>
+ <p>॥ बजरंगबली की जय ॥</p>
+ <p>भक्ति, श्रद्धा र आस्थाको संग्रह</p>
+</footer>
+
+<script>
+function changeTheme(){
+ const theme=document.getElementById("theme").value;
+ document.body.setAttribute("data-theme",theme);
+}
+
+function showTab(id,btn){
+ document.querySelectorAll(".panel").forEach(p=>{
+  p.classList.remove("active");
+ });
+ document.getElementById(id).classList.add("active");
+
+ document.querySelectorAll(".tabs button").forEach(b=>{
+  b.classList.remove("active");
+ });
+ btn.classList.add("active");
+
+ document.getElementById("search").value="";
+ searchContent();
+}
+
+function copySection(id){
+ const text=document.getElementById(id).innerText;
+ navigator.clipboard.writeText(text).then(()=>{
+  alert("✅ सामग्री Copy भयो!");
+ }).catch(()=>{
+  alert("Copy हुन सकेन। सामग्री Select गरेर Copy गर्नुहोस्।");
+ });
+}
+
+function searchContent(){
+ const query=document.getElementById("search").value.toLowerCase();
+ const active=document.querySelector(".panel.active");
+
+ active.querySelectorAll(".verse").forEach(v=>{
+  v.classList.toggle("hidden",
+   !v.innerText.toLowerCase().includes(query)
+  );
+ });
+}
+</script>
+
+</body>
+</html>
