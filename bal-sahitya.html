@@ -1,0 +1,877 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>बाल साहित्य | आयुस नेपाली साहित्य</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+ --bg:#f4f3ff;
+ --card:#fff;
+ --text:#292344;
+ --muted:#77718c;
+ --primary:#7650df;
+ --secondary:#ec65a5;
+ --soft:#eee8ff;
+ --border:#e5ddf5;
+ --shadow:0 8px 28px #39216c12;
+ --gradient:linear-gradient(135deg,#7650df,#ec65a5);
+}
+
+body{
+ font-family:"Noto Sans Devanagari",sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ line-height:1.8;
+ transition:.3s;
+}
+
+body[data-theme="dark"]{
+ --bg:#151326;--card:#25213a;--text:#f5f1ff;
+ --muted:#c3bad8;--primary:#b39aff;
+ --secondary:#f18abd;--soft:#383052;--border:#443b5c;
+}
+body[data-theme="ocean"]{
+ --bg:#e9faff;--card:#fff;--text:#164454;
+ --primary:#078eaa;--secondary:#31c6b0;
+ --soft:#d9f5f8;--border:#bde7ed;
+}
+body[data-theme="pink"]{
+ --bg:#fff0f7;--card:#fff;--text:#682747;
+ --primary:#df438b;--secondary:#ff91bd;
+ --soft:#ffe0ee;--border:#f5c3dc;
+}
+body[data-theme="purple"]{
+ --bg:#f2ebff;--card:#fff;--text:#38205c;
+ --primary:#8046dc;--secondary:#bd79f5;
+ --soft:#e9dcff;--border:#d8c4f5;
+}
+body[data-theme="blue"]{
+ --bg:#edf5ff;--card:#fff;--text:#19375f;
+ --primary:#2563eb;--secondary:#60a5fa;
+ --soft:#dceaff;--border:#c5daf8;
+}
+body[data-theme="green"]{
+ --bg:#edfff2;--card:#fff;--text:#194c31;
+ --primary:#16965b;--secondary:#64c98b;
+ --soft:#d9f7e3;--border:#bfe7cb;
+}
+body[data-theme="sunset"]{
+ --bg:#fff2e9;--card:#fff;--text:#66351d;
+ --primary:#ed7134;--secondary:#e9a33d;
+ --soft:#ffe6d2;--border:#f4cfb5;
+}
+body[data-theme="rose"]{
+ --bg:#fff0f1;--card:#fff;--text:#662b3d;
+ --primary:#be365b;--secondary:#ee8298;
+ --soft:#ffe0e6;--border:#f2c1cd;
+}
+body[data-theme="forest"]{
+ --bg:#edf5ed;--card:#fff;--text:#23442c;
+ --primary:#27733d;--secondary:#82b66c;
+ --soft:#dcebd9;--border:#c4dcc0;
+}
+body[data-theme="gold"]{
+ --bg:#fff9e8;--card:#fffef8;--text:#59451a;
+ --primary:#bd850b;--secondary:#edbd43;
+ --soft:#fff0c3;--border:#eddda9;
+}
+body[data-theme="sky"]{
+ --bg:#eaf6ff;--card:#fff;--text:#24466b;
+ --primary:#2696d4;--secondary:#72c8f4;
+ --soft:#d9efff;--border:#c3e4f8;
+}
+body[data-theme="lavender"]{
+ --bg:#f7efff;--card:#fff;--text:#503367;
+ --primary:#9856c7;--secondary:#d29bea;
+ --soft:#efdefb;--border:#e1c9f0;
+}
+body[data-theme="mint"]{
+ --bg:#eafff8;--card:#fff;--text:#245247;
+ --primary:#16a58c;--secondary:#73d9ba;
+ --soft:#d6f8ed;--border:#b8e9dc;
+}
+body[data-theme="coffee"]{
+ --bg:#f5ecdf;--card:#fffaf2;--text:#493322;
+ --primary:#91613d;--secondary:#c89a6b;
+ --soft:#ead9c3;--border:#dfc9ad;
+}
+body[data-theme="rainbow"]{
+ --bg:#f2f4ff;--card:#fff;--text:#302b55;
+ --primary:#7450d9;--secondary:#ed70a8;
+ --soft:#eae5ff;--border:#d9d0f5;
+}
+
+/* शीर्षक */
+
+.top-title{
+ text-align:center;
+ padding:18px 10px 5px;
+ color:var(--primary);
+ font-size:22px;
+ font-weight:800;
+}
+
+/* मुख्य स्टाइलिश बोर्डर */
+
+.brand-box{
+ max-width:1180px;
+ margin:10px auto 15px;
+ padding:5px;
+ border-radius:24px;
+ background:linear-gradient(120deg,#7650df,#ec65a5,#13b8b0,#7650df);
+ background-size:300% 300%;
+ animation:borderMove 7s ease infinite;
+}
+
+@keyframes borderMove{
+ 0%{background-position:0% 50%}
+ 50%{background-position:100% 50%}
+ 100%{background-position:0% 50%}
+}
+
+.brand-inner{
+ background:var(--card);
+ border-radius:20px;
+ text-align:center;
+ padding:25px 12px;
+ color:var(--text);
+}
+
+.brand-inner .emoji{
+ font-size:32px;
+}
+
+.brand-inner h1{
+ font-size:clamp(24px,5vw,36px);
+ font-weight:800;
+ background:var(--gradient);
+ color:transparent;
+ background-clip:text;
+}
+
+.brand-inner p{
+ font-size:13px;
+ color:var(--muted);
+}
+
+/* दुईवटा मेनु */
+
+.main-nav{
+ max-width:1180px;
+ margin:15px auto;
+ padding:0 12px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
+
+.main-nav a{
+ text-decoration:none;
+ text-align:center;
+ padding:13px;
+ border-radius:14px;
+ color:white;
+ background:var(--gradient);
+ font-size:14px;
+ font-weight:800;
+ box-shadow:var(--shadow);
+ transition:.25s;
+}
+
+.main-nav a:hover{
+ transform:translateY(-3px);
+}
+
+/* अलग Theme बटन */
+
+.theme-launch{
+ position:fixed;
+ right:18px;
+ bottom:20px;
+ z-index:500;
+ width:58px;
+ height:58px;
+ border:3px solid white;
+ border-radius:50%;
+ background:var(--gradient);
+ color:white;
+ font-size:25px;
+ box-shadow:0 7px 25px #0003;
+ cursor:pointer;
+}
+
+.theme-modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:1500;
+ background:#090617a8;
+ padding:15px;
+ align-items:center;
+ justify-content:center;
+}
+
+.theme-box{
+ background:var(--card);
+ color:var(--text);
+ width:100%;
+ max-width:440px;
+ padding:22px;
+ border-radius:23px;
+ box-shadow:0 20px 60px #0005;
+}
+
+.theme-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:18px;
+}
+
+.theme-head h2{
+ color:var(--primary);
+ font-size:19px;
+}
+
+.theme-close{
+ background:#e74c3c;
+ color:white;
+ border:0;
+ padding:6px 12px;
+ border-radius:9px;
+}
+
+.theme-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:10px;
+}
+
+.theme-option{
+ background:var(--soft);
+ color:var(--text);
+ border:2px solid transparent;
+ border-radius:12px;
+ padding:11px 5px;
+ cursor:pointer;
+ font-size:12px;
+ font-weight:700;
+}
+
+.theme-option.active{
+ border-color:var(--primary);
+}
+
+.theme-color{
+ width:28px;
+ height:28px;
+ border-radius:50%;
+ margin:0 auto 5px;
+ background:var(--color);
+ border:2px solid #ffffffaa;
+}
+
+/* मुख्य सामग्री */
+
+.container{
+ max-width:1180px;
+ margin:auto;
+ padding:15px;
+}
+
+.intro{
+ background:var(--card);
+ padding:24px;
+ border-radius:19px;
+ border:1px solid var(--border);
+ box-shadow:var(--shadow);
+ margin:20px 0;
+}
+
+.intro h2{
+ color:var(--primary);
+ margin-bottom:10px;
+}
+
+.intro p{
+ color:var(--muted);
+ font-size:14px;
+ margin-top:8px;
+}
+
+.controls{
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ margin:22px 0;
+}
+
+input,select,button{
+ font-family:inherit;
+ font-size:14px;
+ padding:11px 13px;
+ border-radius:10px;
+ border:1px solid var(--border);
+}
+
+input,select{
+ background:var(--card);
+ color:var(--text);
+}
+
+.controls input{
+ flex:1;
+ min-width:200px;
+}
+
+.controls button{
+ background:var(--gradient);
+ color:white;
+ border:0;
+}
+
+.category-title{
+ color:var(--primary);
+ margin:25px 0 15px;
+ font-size:21px;
+}
+
+.category-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(185px,1fr));
+ gap:13px;
+}
+
+.category-card{
+ background:var(--card);
+ padding:17px;
+ border:2px solid var(--border);
+ border-radius:16px;
+ cursor:pointer;
+ box-shadow:var(--shadow);
+ transition:.25s;
+}
+
+.category-card:hover,.category-card.active{
+ border-color:var(--primary);
+ transform:translateY(-3px);
+}
+
+.cat-icon{
+ width:43px;
+ height:43px;
+ border-radius:13px;
+ background:var(--soft);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:23px;
+ margin-bottom:9px;
+}
+
+.category-card h3{font-size:15px}
+.category-card p{font-size:12px;color:var(--muted)}
+.count{color:var(--primary);font-size:12px;font-weight:800}
+
+.results-heading{
+ display:flex;
+ justify-content:space-between;
+ flex-wrap:wrap;
+ gap:10px;
+ margin:30px 0 15px;
+}
+
+.results-heading h2{color:var(--primary)}
+
+.items-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+ gap:15px;
+}
+
+.item{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:16px;
+ padding:18px;
+ box-shadow:var(--shadow);
+ transition:.2s;
+}
+
+.item:hover{transform:translateY(-3px)}
+.item h3{font-size:16px;margin:10px 0}
+.item p{font-size:13px;color:var(--muted);margin-bottom:12px}
+
+.badge{
+ background:var(--soft);
+ color:var(--primary);
+ padding:4px 10px;
+ border-radius:20px;
+ font-size:11px;
+}
+
+.read-btn{
+ background:var(--gradient);
+ color:white;
+ border:0;
+ padding:9px 14px;
+ border-radius:9px;
+ font-weight:700;
+}
+
+.pagination{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:12px;
+ margin:30px 0;
+ flex-wrap:wrap;
+}
+
+.pagination button{
+ background:var(--primary);
+ color:white;
+ border:0;
+}
+
+#pageInfo{font-weight:700}
+
+.empty{
+ background:var(--card);
+ padding:30px;
+ border-radius:15px;
+ text-align:center;
+ grid-column:1/-1;
+}
+
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:1000;
+ background:#090617c9;
+ padding:15px;
+ overflow:auto;
+}
+
+.modal-content{
+ background:var(--card);
+ color:var(--text);
+ max-width:750px;
+ margin:35px auto;
+ padding:25px;
+ border-radius:20px;
+ position:relative;
+}
+
+.close{
+ position:absolute;
+ top:12px;
+ right:12px;
+ background:#e74c3c;
+ color:white;
+ border:0;
+}
+
+#readerText{
+ margin-top:20px;
+ font-size:17px;
+ line-height:2.1;
+}
+
+#readerText p{margin-bottom:13px}
+
+.reader-tools{
+ display:flex;
+ flex-wrap:wrap;
+ gap:8px;
+ margin-top:20px;
+}
+
+.reader-tools button{
+ background:var(--soft);
+ color:var(--primary);
+ border:1px solid var(--border);
+}
+
+footer{
+ background:var(--gradient);
+ color:white;
+ text-align:center;
+ padding:30px 12px;
+ margin-top:40px;
+}
+
+footer p{font-size:13px;margin-top:5px}
+
+@media(max-width:600px){
+ .container{padding:12px}
+ .category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .items-grid{grid-template-columns:1fr}
+ .brand-box{margin:8px 10px}
+ .main-nav{gap:8px}
+ .main-nav a{font-size:12px;padding:11px 5px}
+ .theme-launch{right:13px;bottom:15px}
+}
+
+@media print{
+ .main-nav,.theme-launch,.theme-modal,.controls,
+ .category-grid,.pagination,.reader-tools,footer{display:none!important}
+}
+</style>
+</head>
+
+<body data-theme="light">
+
+<h2 class="top-title">📖 बाल साहित्य</h2>
+
+<div class="brand-box">
+ <div class="brand-inner">
+  <div class="emoji">📚 ✨ 🌈</div>
+  <h1>आयुस नेपाली साहित्य</h1>
+  <p>🌸 ज्ञान • सिर्जना • मनोरञ्जन • बाल संसार 🌸</p>
+  <p>AAYUSH NEPALI SAHITYA</p>
+ </div>
+</div>
+
+<nav class="main-nav">
+ <a href="index.html">🏠 गृह</a>
+ <a href="bal-sahitya.html">📚 बाल साहित्य</a>
+</nav>
+
+<!-- छुट्टै Theme Popup -->
+
+<button class="theme-launch" onclick="openThemes()" title="Theme परिवर्तन">🎨</button>
+
+<div class="theme-modal" id="themeModal">
+ <div class="theme-box">
+  <div class="theme-head">
+   <h2>🎨 आफ्नो Theme छान्नुहोस्</h2>
+   <button class="theme-close" onclick="closeThemes()">✕</button>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:14px">
+   ✨ आफ्नो मनपर्ने डिजाइन र रङ छान्नुहोस्।
+  </p>
+  <div class="theme-grid" id="themeGrid"></div>
+  <button onclick="resetTheme()" style="width:100%;margin-top:15px;background:var(--primary);color:white;border:0">↺ Default Theme</button>
+ </div>
+</div>
+
+<main class="container">
+
+<section class="intro">
+ <h2>🌈 बाल साहित्यमा स्वागत छ</h2>
+ <p>
+ बाल साहित्य बालबालिकाको कल्पनाशक्ति, सिर्जनशीलता,
+ ज्ञान, व्यवहार र व्यक्तित्व विकास गर्ने साहित्यको
+ महत्वपूर्ण क्षेत्र हो। यसले बालबालिकालाई रमाइलो
+ तरिकाले सिक्न, बुझ्न, प्रश्न गर्न र नयाँ कुरा
+ खोज्न प्रेरित गर्छ।
+ </p>
+ <p>
+ यहाँ बाल कथा, बाल कविता, चुटकिला, पहेली, विज्ञान,
+ प्रकृति, राम्रो बानी, बाल मनोविज्ञान, खेल,
+ अभिभावक सुझाव र बालबालिकाको दैनिक जीवनसँग
+ सम्बन्धित विभिन्न विषयहरू समेटिएका छन्।
+ </p>
+</section>
+
+<div class="controls">
+ <input type="search" id="searchInput" placeholder="🔍 विषय वा शब्द खोज्नुहोस्...">
+ <select id="categorySelect">
+  <option value="all">📚 सबै विधा</option>
+ </select>
+ <button onclick="toggleDark()">🌙 मोड बदल्नुहोस्</button>
+</div>
+
+<h2 class="category-title">📖 बाल साहित्यका विधाहरू</h2>
+<div class="category-grid" id="categoryGrid"></div>
+
+<div class="results-heading">
+ <h2 id="resultTitle">सबै विषयवस्तु</h2>
+ <span class="count" id="totalCount"></span>
+</div>
+
+<div class="items-grid" id="itemsGrid"></div>
+
+<div class="pagination">
+ <button onclick="changePage(-1)">⬅ अघिल्लो</button>
+ <span id="pageInfo">पृष्ठ १</span>
+ <button onclick="changePage(1)">अर्को ➡</button>
+</div>
+
+</main>
+
+<div class="modal" id="readerModal">
+ <div class="modal-content">
+  <button class="close" onclick="closeReader()">✕</button>
+  <h2 id="readerTitle"></h2>
+  <span class="badge" id="readerCategory"></span>
+  <div id="readerText"></div>
+  <div class="reader-tools">
+   <button onclick="changeFont(1)">A+ अक्षर ठूलो</button>
+   <button onclick="changeFont(-1)">A- अक्षर सानो</button>
+   <button onclick="window.print()">🖨 प्रिन्ट</button>
+  </div>
+ </div>
+</div>
+
+<footer>
+ <h3>📚 आयुस नेपाली साहित्य</h3>
+ <p>बालबालिकाको ज्ञान, कल्पना र सिर्जनशीलताका लागि।</p>
+ <p>Developed by Aayush Jaishi</p>
+ <p>© 2026 AAYUSH NEPALI SAHITYA</p>
+</footer>
+
+<script>
+const categories=[
+{name:"बाल कथा",icon:"📖",description:"शिक्षामूलक र रमाइला कथाहरू",topics:["इमानदार बालक","मेहनती किसान","बुद्धिमान खरायो","जङ्गलका साथीहरू","सानो चरा","असल मित्रता","सहयोगी बालक","साहसी बालिका","विद्यालयको पहिलो दिन","हराएको खेलौना"]},
+{name:"बाल कविता",icon:"✍️",description:"सरल र रमाइला कविताहरू",topics:["मेरो विद्यालय","हाम्रो परिवार","प्यारा साथीहरू","रमाइलो गाउँ","सुन्दर प्रकृति","मेरो देश","आकाशका तारा","फूलको संसार","पानीको महत्व","हाम्रो पृथ्वी"]},
+{name:"बाल चुटकिला",icon:"😂",description:"हाँसो र मनोरञ्जन",topics:["विद्यालयका रमाइला कुरा","शिक्षक र विद्यार्थी","बुद्धिमान बालक","साथीहरूको कुराकानी","जनावरका रमाइला कुरा","घरका रमाइला घटना","खेल मैदानका चुटकिला","हास्यास्पद प्रश्न","बालबालिकाको कल्पना","रमाइलो संवाद"]},
+{name:"पहेली",icon:"🧩",description:"सोच्ने र उत्तर खोज्ने खेल",topics:["फलफूलको पहेली","जनावरको पहेली","प्रकृतिको पहेली","रङहरूको पहेली","विद्यालयको पहेली","घरका सामान","आकाशका वस्तु","खेलकुदका पहेली","संख्या पहेली","दैनिक जीवनका पहेली"]},
+{name:"बाल विज्ञान",icon:"🔬",description:"सरल भाषामा विज्ञान",topics:["सौर्यमण्डल","पानीको चक्र","हावाको महत्व","बिरुवाको जीवन","मानव शरीर","चुम्बकको काम","प्रकाश र छाया","आवाज कसरी आउँछ","मौसम परिवर्तन","ऊर्जाका स्रोत"]},
+{name:"प्रकृति र वातावरण",icon:"🌳",description:"प्रकृति र वातावरण संरक्षण",topics:["हरियो वन","हिमालको सुन्दरता","नदी र खोला","चराचुरुङ्गी","जङ्गली जनावर","फूलबारी","वर्षा र बादल","वातावरण सफाइ","वृक्षरोपण","पृथ्वीको संरक्षण"]},
+{name:"राम्रो बानी",icon:"🌟",description:"दैनिक जीवनका असल बानी",topics:["बिहान चाँडै उठ्ने","दाँत सफा गर्ने","हात धुने बानी","समयको पालना","सत्य बोल्ने","सफा कपडा लगाउने","ठूलालाई सम्मान गर्ने","सानालाई माया गर्ने","खाना खेर नफाल्ने","आफ्नो सामान मिलाउने"]},
+{name:"विकासका बानी",icon:"🚀",description:"सीप र व्यक्तित्व विकास",topics:["किताब पढ्ने बानी","नयाँ कुरा सिक्ने","प्रश्न सोध्ने","आत्मविश्वास बढाउने","समूहमा काम गर्ने","समस्या समाधान गर्ने","आफ्नो विचार राख्ने","समय व्यवस्थापन","सिर्जनशील सोच","लक्ष्य बनाउने"]},
+{name:"बाल मनोविज्ञान",icon:"🧠",description:"भावना र व्यवहार बुझ्ने",topics:["बालबालिकाको खुशी","डर र चिन्ता बुझ्ने","रिस व्यवस्थापन","मायाको आवश्यकता","साथीको महत्व","आत्मविश्वास","एक्लोपन बुझ्ने","भावना व्यक्त गर्ने","प्रशंसा र प्रोत्साहन","बालबालिकाको कल्पना"]},
+{name:"सचित्र खेल",icon:"🎨",description:"चित्र र गतिविधिमा आधारित खेल",topics:["रङ चिन्ने खेल","चित्र मिलाउने खेल","अक्षर खोज्ने खेल","संख्या चिन्ने खेल","जनावर चिन्ने खेल","फरक वस्तु पत्ता लगाउने","चित्रबाट कथा बनाउने","स्मरणशक्ति खेल","आकार चिन्ने खेल","शब्द मिलाउने खेल"]},
+{name:"अभिभावक सुझाव",icon:"👨‍👩‍👧",description:"अभिभावकका लागि उपयोगी सुझाव",topics:["बालबालिकासँग कुराकानी","पढाइमा सहयोग","खेल्ने समयको महत्व","सकारात्मक व्यवहार","बालबालिकाको कुरा सुन्ने","प्रशंसा गर्ने तरिका","सुरक्षित वातावरण","स्वस्थ दिनचर्या","मोबाइल प्रयोगमा सन्तुलन","आत्मनिर्भर बनाउन सहयोग"]},
+{name:"बाल रुचि र खेल",icon:"⚽",description:"खेल र बाल रुचिका विषय",topics:["फुटबल खेल्ने रुचि","चित्र बनाउने रुचि","गीत गाउने रुचि","नाच्ने रुचि","किताब पढ्ने रुचि","बगैँचामा खेल्ने","साथीसँग खेल्ने","नयाँ खेल सिक्ने","कागजका सामग्री बनाउने","बाहिरी खेलकुद"]},
+{name:"बालमनका कुरा",icon:"💭",description:"बालबालिकाका भावना र विचार",topics:["मेरो सपना","मेरो डर","मलाई मन पर्ने कुरा","मेरो मिल्ने साथी","मेरो परिवारप्रतिको माया","मेरो खुसीको क्षण","मेरो इच्छा","मेरो कल्पना","मलाई मन नपर्ने कुरा","मेरो भविष्यको सोच"]},
+{name:"बाल अवस्था",icon:"🧒",description:"उमेरअनुसार सिकाइ र विकास",topics:["सानो उमेरको सिकाइ","विद्यालय जाने उमेर","खेल्ने उमेर","भाषा सिक्ने अवस्था","सामाजिक व्यवहार","साथी बनाउने अवस्था","आत्मनिर्भर बन्ने अभ्यास","नयाँ वातावरणमा घुलमिल","जिज्ञासु हुने अवस्था","सीप विकासको अवस्था"]},
+{name:"बालबालिकामा परिवर्तन",icon:"🌱",description:"सकारात्मक परिवर्तनका विषय",topics:["सोचाइमा परिवर्तन","बोल्ने सीपमा परिवर्तन","पढ्ने बानीमा परिवर्तन","व्यवहारमा सुधार","आत्मविश्वासमा वृद्धि","मित्रता विकास","जिम्मेवारीको भावना","सिर्जनशीलतामा वृद्धि","समस्या समाधान गर्ने क्षमता","आत्मनिर्भरताको विकास"]},
+{name:"बाल क्रियाकलाप",icon:"🎯",description:"सिकाइ र सिर्जनाका गतिविधिहरू",topics:["चित्रकला गतिविधि","कथा सुनाउने गतिविधि","गीत गाउने गतिविधि","समूह छलफल","वृक्षरोपण गतिविधि","कागजको काम","सामान्य प्रयोगात्मक काम","स्मरणशक्ति अभ्यास","शब्द खेल","सफा वातावरण अभियान"]}
+];
+
+const angles=["परिचय र महत्व","दैनिक जीवनमा प्रयोग","बालबालिकाका लागि फाइदा","सिक्ने सजिलो तरिका","व्यवहारमा अपनाउने उपाय","रमाइलो अभ्यास","परिवारको भूमिका","विद्यालयको भूमिका","सिर्जनशील गतिविधि","मुख्य सिकाइ र सन्देश"];
+
+const allItems=[];
+categories.forEach((cat,ci)=>{
+ for(let i=0;i<100;i++){
+  let topic=cat.topics[i%10];
+  let angle=angles[Math.floor(i/10)];
+  allItems.push({id:ci*100+i+1,category:cat.name,icon:cat.icon,topic,angle,title:topic+" — "+angle+" ("+(i+1)+")"});
+ }
+});
+
+function nepaliNumber(n){
+ const d=["०","१","२","३","४","५","६","७","८","९"];
+ return String(n).replace(/[0-9]/g,x=>d[x]);
+}
+
+function makeExplanation(item){
+ const p=[
+ "यस विषयमा "+item.topic+" सम्बन्धी आधारभूत जानकारी प्रस्तुत गरिएको छ। बालबालिकाले यसलाई सरल भाषामा बुझ्न र आफ्नो दैनिक जीवनसँग जोड्न सक्छन्।",
+ item.angle+" यस विषयको महत्वपूर्ण पक्ष हो। यसले बालबालिकालाई नयाँ कुरा जान्न, सोच्न र आफ्नो अनुभवबाट सिक्न सहयोग पुर्‍याउँछ।",
+ "बालबालिकाले यस विषयलाई कथा, संवाद, चित्र, खेल र अभ्यासका माध्यमबाट अझ राम्रोसँग बुझ्न सक्छन्। सिकाइलाई रमाइलो बनाउनु यसको मुख्य उद्देश्य हो।",
+ "घरपरिवार र विद्यालयले बालबालिकालाई यस विषयमा सहयोग गर्न सक्छन्। उनीहरूको प्रश्न ध्यानपूर्वक सुन्ने र सही तरिकाले उत्तर दिने वातावरण बनाउनु उपयोगी हुन्छ।",
+ "यस विषयमा सिकेका कुरालाई व्यवहारमा प्रयोग गर्न साना गतिविधि गर्न सकिन्छ। उदाहरणका लागि, चित्र बनाउने, साथीहरूसँग छलफल गर्ने वा आफ्नै अनुभव सुनाउने अभ्यास गर्न सकिन्छ।",
+ "बालबालिकाको उमेर, रुचि र सिक्ने गतिअनुसार गतिविधि मिलाउनु आवश्यक हुन्छ। उनीहरूलाई गल्ती गर्न र फेरि प्रयास गर्न सुरक्षित अवसर दिनुपर्छ।",
+ "यस विषयको मुख्य सन्देश भनेको बालबालिकामा ज्ञान, जिज्ञासा, सिर्जनशीलता र सकारात्मक सोच विकास गर्नु हो।"
+ ];
+ return p.map((x,i)=>"<p><strong>अनुच्छेद "+nepaliNumber(i+1)+":</strong> "+x+"</p>").join("");
+}
+
+let selectedCategory="all",currentPage=1,fontSize=17;
+const perPage=12;
+const $=id=>document.getElementById(id);
+
+function showCategories(){
+ $("categoryGrid").innerHTML="";
+ const all=document.createElement("div");
+ all.className="category-card "+(selectedCategory==="all"?"active":"");
+ all.innerHTML='<div class="cat-icon">📚</div><h3>सबै विधा</h3><p>सबै विषयवस्तु हेर्नुहोस्</p><span class="count">१,६०० विषय</span>';
+ all.onclick=()=>selectCategory("all");
+ $("categoryGrid").appendChild(all);
+
+ categories.forEach(cat=>{
+  const card=document.createElement("div");
+  card.className="category-card "+(selectedCategory===cat.name?"active":"");
+  card.innerHTML='<div class="cat-icon">'+cat.icon+'</div><h3>'+cat.name+'</h3><p>'+cat.description+'</p><span class="count">१०० विषय</span>';
+  card.onclick=()=>selectCategory(cat.name);
+  $("categoryGrid").appendChild(card);
+ });
+}
+
+function createDropdown(){
+ categories.forEach(cat=>{
+  const o=document.createElement("option");
+  o.value=cat.name;
+  o.textContent=cat.name;
+  $("categorySelect").appendChild(o);
+ });
+}
+
+function selectCategory(name){
+ selectedCategory=name;
+ currentPage=1;
+ $("categorySelect").value=name;
+ showCategories();
+ renderItems();
+}
+
+function getFilteredItems(){
+ const q=$("searchInput").value.trim().toLowerCase();
+ return allItems.filter(item=>
+  (selectedCategory==="all"||item.category===selectedCategory)&&
+  (item.title+" "+item.topic+" "+item.category+" "+item.angle).toLowerCase().includes(q)
+ );
+}
+
+function renderItems(){
+ const filtered=getFilteredItems();
+ const pages=Math.max(1,Math.ceil(filtered.length/perPage));
+ currentPage=Math.min(currentPage,pages);
+ const visible=filtered.slice((currentPage-1)*perPage,currentPage*perPage);
+ $("itemsGrid").innerHTML="";
+ $("totalCount").textContent=nepaliNumber(filtered.length)+" वटा विषय भेटिए";
+ $("resultTitle").textContent=selectedCategory==="all"?"सबै विषयवस्तु":selectedCategory;
+
+ if(!visible.length){
+  $("itemsGrid").innerHTML='<div class="empty"><h3>🔍 कुनै विषय भेटिएन।</h3><p>अर्को शब्द प्रयोग गरेर खोज्नुहोस्।</p></div>';
+ }
+
+ visible.forEach(item=>{
+  const card=document.createElement("article");
+  card.className="item";
+  const badge=document.createElement("span");
+  badge.className="badge";
+  badge.textContent=item.category;
+  const title=document.createElement("h3");
+  title.textContent=item.icon+" "+item.title;
+  const desc=document.createElement("p");
+  desc.textContent=item.topic+" विषयको "+item.angle+" सम्बन्धी जानकारी र सिकाइ।";
+  const btn=document.createElement("button");
+  btn.className="read-btn";
+  btn.textContent="📖 पूरा पढ्नुहोस्";
+  btn.onclick=()=>openReader(item.id);
+  card.append(badge,title,desc,btn);
+  $("itemsGrid").appendChild(card);
+ });
+ $("pageInfo").textContent="पृष्ठ "+nepaliNumber(currentPage)+" / "+nepaliNumber(pages);
+}
+
+function changePage(n){
+ const pages=Math.max(1,Math.ceil(getFilteredItems().length/perPage));
+ currentPage=Math.max(1,Math.min(pages,currentPage+n));
+ renderItems();
+ document.querySelector(".results-heading").scrollIntoView({behavior:"smooth"});
+}
+
+function openReader(id){
+ const item=allItems.find(x=>x.id===id);
+ if(!item)return;
+ $("readerTitle").textContent=item.icon+" "+item.title;
+ $("readerCategory").textContent=item.category;
+ $("readerText").innerHTML=makeExplanation(item);
+ fontSize=17;
+ $("readerText").style.fontSize=fontSize+"px";
+ $("readerModal").style.display="block";
+ document.body.style.overflow="hidden";
+}
+
+function closeReader(){
+ $("readerModal").style.display="none";
+ document.body.style.overflow="";
+}
+
+function changeFont(n){
+ fontSize=Math.max(13,Math.min(30,fontSize+n));
+ $("readerText").style.fontSize=fontSize+"px";
+}
+
+function toggleDark(){
+ setTheme(document.body.dataset.theme==="dark"?"light":"dark");
+}
+
+/* छुट्टै Theme सिस्टम */
+
+const themes=[
+ ["light","Light","☀️","#7650df"],
+ ["dark","Dark","🌙","#25213a"],
+ ["ocean","Ocean","🌊","#078eaa"],
+ ["pink","Pink","🌸","#df438b"],
+ ["purple","Purple","💜","#8046dc"],
+ ["blue","Blue","💙","#2563eb"],
+ ["green","Green","🌿","#16965b"],
+ ["sunset","Sunset","🌅","#ed7134"],
+ ["rose","Rose","🌹","#be365b"],
+ ["forest","Forest","🌲","#27733d"],
+ ["gold","Gold","✨","#bd850b"],
+ ["sky","Sky Blue","☁️","#2696d4"],
+ ["lavender","Lavender","🪻","#9856c7"],
+ ["mint","Mint","🍃","#16a58c"],
+ ["coffee","Coffee","☕","#91613d"],
+ ["rainbow","Rainbow","🌈","#7450d9"]
+];
+
+function renderThemes(){
+ const grid=$("themeGrid");
+ grid.innerHTML="";
+ themes.forEach(([id,name,emoji,color])=>{
+  const b=document.createElement("button");
+  b.className="theme-option "+(document.body.dataset.theme===id?"active":"");
+  b.innerHTML='<div class="theme-color" style="--color:'+color+'"></div>'+emoji+' '+name;
+  b.onclick=()=>setTheme(id);
+  grid.appendChild(b);
+ });
+}
+
+function setTheme(id){
+ document.body.dataset.theme=id;
+ try{localStorage.setItem("aayushTheme15",id)}catch(e){}
+ renderThemes();
+}
+
+function openThemes(){
+ $("themeModal").style.display="flex";
+}
+
+function closeThemes(){
+ $("themeModal").style.display="none";
+}
+
+function resetTheme(){
+ setTheme("light");
+}
+
+$("themeModal").addEventListener("click",e=>{
+ if(e.target===$("themeModal"))closeThemes();
+});
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){
+  closeReader();
+  closeThemes();
+ }
+});
+
+$("searchInput").addEventListener("input",()=>{
+ currentPage=1;
+ renderItems();
+});
+
+$("categorySelect").addEventListener("change",e=>selectCategory(e.target.value));
+
+try{
+ const saved=localStorage.getItem("aayushTheme15");
+ if(saved&&themes.some(t=>t[0]===saved)){
+  document.body.dataset.theme=saved;
+ }
+}catch(e){}
+
+createDropdown();
+showCategories();
+renderItems();
+renderThemes();
+</script>
+
+</body>
+</html>
