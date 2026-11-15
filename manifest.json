@@ -11,8 +11,12 @@
   "scope": "./",
 
   "display": "standalone",
-  "orientation": "portrait",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
+  ],
 
+  "orientation": "portrait",
   "theme_color": "#123456",
   "background_color": "#ffffff",
 
@@ -47,8 +51,7 @@
       "icons": [
         {
           "src": "./icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
+          "sizes": "192x192"
         }
       ]
     },
@@ -59,8 +62,7 @@
       "icons": [
         {
           "src": "./icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
+          "sizes": "192x192"
         }
       ]
     },
@@ -71,10 +73,24 @@
       "icons": [
         {
           "src": "./icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
+          "sizes": "192x192"
         }
       ]
     }
-  ]
+  ],
+
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+
+  "share_target": {
+    "action": "./share.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }
