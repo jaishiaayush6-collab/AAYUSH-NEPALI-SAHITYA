@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AJ नेपाली साहित्य</title>
 <link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#123456">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700;800&display=swap');
 
@@ -569,22 +570,20 @@ function searchCards(){
 document.getElementById('searchInput')
 .addEventListener('input',searchCards);
 </script>
-
-</body>
-  <script>
+<script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js")
-      .then((registration) => {
-        console.log(
-          "AJ नेपाली साहित्य Service Worker सफल भयो:",
-          registration.scope
-        );
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(registration => {
+        console.log("Service Worker Registered!");
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Service Worker Error:", error);
       });
   });
 }
 </script>
+
+
+</body>
 </html>
