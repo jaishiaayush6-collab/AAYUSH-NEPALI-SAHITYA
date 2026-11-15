@@ -571,4 +571,20 @@ document.getElementById('searchInput')
 </script>
 
 </body>
+  <script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then((registration) => {
+        console.log(
+          "AJ नेपाली साहित्य Service Worker सफल भयो:",
+          registration.scope
+        );
+      })
+      .catch((error) => {
+        console.error("Service Worker Error:", error);
+      });
+  });
+}
+</script>
 </html>
