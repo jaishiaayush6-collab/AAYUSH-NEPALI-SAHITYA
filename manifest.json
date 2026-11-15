@@ -2,8 +2,8 @@
 {
   "id": "./",
   "name": "AJ नेपाली साहित्य",
-  "short_name": "AJ साहित्",
-  "description": "नेपाली कथा, कविता, उपन्यास, निबन्ध र साहित्यको डिजिटल संग्रह।",
+  "short_name": "AJ साहित्य",
+  "description": "नेपाली कथा, कविता, उपन्यास, निबन्ध, गजल र साहित्यको डिजिटल संग्रह।",
   "lang": "ne",
   "dir": "ltr",
 
@@ -11,12 +11,8 @@
   "scope": "./",
 
   "display": "standalone",
-  "display_override": [
-    "window-controls-overlay",
-    "standalone"
-  ],
-
   "orientation": "portrait",
+
   "theme_color": "#123456",
   "background_color": "#ffffff",
 
@@ -46,71 +42,17 @@
   "screenshots": [
     {
       "src": "./screenshot-desktop.png",
-      "sizes": "1280x720",
-      "type": "image/png",
+      "sizes": "500x332",
+      "type": "image/jpeg",
       "form_factor": "wide",
-      "label": "AJ Nepali Sahitya Desktop Homepage"
+      "label": "एजे नेपाली साहित्य Desktop Homepage"
     },
     {
       "src": "./screenshot-mobile.png",
-      "sizes": "720x1280",
-      "type": "image/png",
+      "sizes": "471x1019",
+      "type": "image/jpeg",
       "form_factor": "narrow",
-      "label": "AAYUSH Nepali Sahitya Mobile Homepage"
+      "label": "एजे नेपाली साहित्य Mobile Homepage"
     }
-  ],
-
-  "shortcuts": [
-    {
-      "name": "कथा पढ्नुहोस्",
-      "short_name": "कथा",
-      "url": "./katha.html",
-      "icons": [
-        {
-          "src": "./icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "कविता पढ्नुहोस्",
-      "short_name": "कविता",
-      "url": "./kabita.html",
-      "icons": [
-        {
-          "src": "./icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "निबन्ध पढ्नुहोस्",
-      "short_name": "निबन्ध",
-      "url": "./nibandha.html",
-      "icons": [
-        {
-          "src": "./icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    }
-  ],
-
-  "launch_handler": {
-    "client_mode": "navigate-existing"
-  },
-
-  "share_target": {
-    "action": "./share.html",
-    "method": "GET",
-    "enctype": "application/x-www-form-urlencoded",
-    "params": {
-      "title": "title",
-      "text": "text",
-      "url": "url"
-    }
-  }
+  ]
 }
