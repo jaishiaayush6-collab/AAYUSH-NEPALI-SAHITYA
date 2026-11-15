@@ -1,8 +1,8 @@
 
 {
   "id": "./",
-  "name": "AJ Nepali Sahitya",
-  "short_name": "AJ Sahitya",
+  "name": "AJ नेपाली साहित्य",
+  "short_name": "AJ साहित्य",
   "description": "नेपाली कथा, कविता, उपन्यास, निबन्ध र साहित्यको डिजिटल संग्रह।",
   "lang": "ne",
   "dir": "ltr",
