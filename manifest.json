@@ -1,8 +1,8 @@
 
 {
   "id": "./",
-  "name": "AAYUSH Nepali Sahitya",
-  "short_name": "Aayush Sahitya",
+  "name": "AJ नेपाली साहित्य",
+  "short_name": "AJ साहित्",
   "description": "नेपाली कथा, कविता, उपन्यास, निबन्ध र साहित्यको डिजिटल संग्रह।",
   "lang": "ne",
   "dir": "ltr",
@@ -43,6 +43,23 @@
     "lifestyle"
   ],
 
+  "screenshots": [
+    {
+      "src": "./screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "AJ Nepali Sahitya Desktop Homepage"
+    },
+    {
+      "src": "./screenshot-mobile.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "AAYUSH Nepali Sahitya Mobile Homepage"
+    }
+  ],
+
   "shortcuts": [
     {
       "name": "कथा पढ्नुहोस्",
@@ -51,7 +68,8 @@
       "icons": [
         {
           "src": "./icon-192.png",
-          "sizes": "192x192"
+          "sizes": "192x192",
+          "type": "image/png"
         }
       ]
     },
@@ -62,7 +80,8 @@
       "icons": [
         {
           "src": "./icon-192.png",
-          "sizes": "192x192"
+          "sizes": "192x192",
+          "type": "image/png"
         }
       ]
     },
@@ -73,7 +92,8 @@
       "icons": [
         {
           "src": "./icon-192.png",
-          "sizes": "192x192"
+          "sizes": "192x192",
+          "type": "image/png"
         }
       ]
     }
