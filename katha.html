@@ -1,608 +1,966 @@
-
 <!DOCTYPE html>
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>कथा संसार 📚</title>AJ नेपाली साहित्य
+<title>कथा संसार | AJ नेपाली साहित्य</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap');
 
-:root {
-  --bg:#fff7f0;
+:root{
+  --bg:#f5f3ff;
   --surface:#ffffff;
-  --text:#30233b;
-  --muted:#82758b;
-  --primary:#e94e77;
-  --secondary:#845ec2;
-  --soft:#fff0f4;
-  --border:#f2dce4;
-  --shadow:0 10px 30px rgba(90,40,80,.09);
+  --text:#252044;
+  --muted:#77718d;
+  --primary:#7652d8;
+  --secondary:#ed70b7;
+  --border:#e9e3fa;
+  --shadow:0 12px 35px rgba(70,45,120,.10);
 }
 
-body.dark {
-  --bg:#151322;
-  --surface:#211e32;
-  --text:#f8f0ff;
-  --muted:#bdb2ce;
-  --primary:#ff83a5;
-  --secondary:#b69cff;
-  --soft:#33263e;
-  --border:#40354d;
-  --shadow:0 10px 30px rgba(0,0,0,.25);
-}
+*{box-sizing:border-box}
 
-* {
-  box-sizing:border-box;
+body{
   margin:0;
-  padding:0;
-}
-
-body {
   font-family:'Noto Sans Devanagari',sans-serif;
   background:var(--bg);
   color:var(--text);
   transition:.3s;
 }
 
-header {
-  position:sticky;
-  top:0;
-  z-index:10;
+body.dark{
+  --bg:#111326;
+  --surface:#1c2038;
+  --text:#f4f1ff;
+  --muted:#b7b1d0;
+  --border:#343653;
+  --shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+body.blue{
+  --bg:#edf5ff;--primary:#2875d8;--secondary:#51b8e9;
+  --text:#17345b;--surface:#fff;--border:#d8e9fc;
+}
+
+body.nightblue{
+  --bg:#0b1830;--surface:#142747;--text:#eef5ff;
+  --muted:#a9bfdc;--primary:#5595ef;--secondary:#55c5ed;
+  --border:#294366;
+}
+
+body.sky{
+  --bg:#eafaff;--surface:#fff;--text:#17445b;
+  --primary:#269fc9;--secondary:#65d5e9;--border:#d3f0f7;
+}
+
+body.pink{
+  --bg:#fff0f7;--surface:#fff;--text:#632c4d;
+  --primary:#e65b9b;--secondary:#f6a3c9;--border:#f9d9e9;
+}
+
+body.skypink{
+  --bg:#f8f2ff;--surface:#fff;--text:#49335f;
+  --primary:#9b6be0;--secondary:#f28dbd;--border:#eadcf9;
+}
+
+body.green{
+  --bg:#effaf2;--surface:#fff;--text:#244b35;
+  --primary:#299b62;--secondary:#82cf9e;--border:#d8efdf;
+}
+
+body.sunset{
+  --bg:#fff4eb;--surface:#fff;--text:#613b2c;
+  --primary:#e47a43;--secondary:#f4b36b;--border:#f8e1ce;
+}
+
+/* HEADER */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:32px 18px 35px;
+  color:white;
+  text-align:center;
+  background:linear-gradient(125deg,#30206e,#7652d8,#d45aaf);
+  border-radius:0 0 32px 32px;
+  box-shadow:0 15px 40px rgba(91,55,160,.25);
+}
+
+.hero:before,.hero:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  background:rgba(255,255,255,.09);
+}
+
+.hero:before{
+  width:230px;height:230px;
+  top:-130px;left:-50px;
+}
+
+.hero:after{
+  width:190px;height:190px;
+  bottom:-130px;right:-30px;
+}
+
+.brand{
+  position:relative;
+  z-index:1;
+  font-size:14px;
+  letter-spacing:2px;
+  font-weight:700;
+  opacity:.95;
+}
+
+.hero h1{
+  position:relative;
+  z-index:1;
+  margin:12px 0 8px;
+  font-size:clamp(35px,7vw,58px);
+  font-weight:800;
+  letter-spacing:1px;
+  text-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.hero p{
+  position:relative;
+  z-index:1;
+  margin:0;
+  font-size:15px;
+  line-height:1.9;
+  opacity:.95;
+}
+
+.hero-line{
+  width:75px;
+  height:4px;
+  border-radius:20px;
+  background:#ffd5ef;
+  margin:15px auto 0;
+}
+
+/* THEME PICKER */
+
+.theme-area{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 7%;
+  justify-content:flex-end;
+  max-width:1150px;
+  margin:15px auto 0;
+  padding:0 16px;
+}
+
+.theme-box{position:relative}
+
+.theme-toggle{
+  border:1px solid var(--border);
   background:var(--surface);
-  border-bottom:1px solid var(--border);
+  color:var(--text);
+  border-radius:30px;
+  padding:8px 13px;
+  font-family:inherit;
+  font-size:12px;
+  cursor:pointer;
   box-shadow:var(--shadow);
 }
 
-.logo {
-  font-size:29px;
-  font-weight:900;
-  background:linear-gradient(90deg,#ff6584,#9b5de5,#00bbf9);
-  -webkit-background-clip:text;
-  color:transparent;
+.theme-options{
+  display:none;
+  position:absolute;
+  z-index:20;
+  right:0;
+  top:42px;
+  width:210px;
+  padding:12px;
+  border-radius:15px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
 }
 
-.theme-btn {
-  border:none;
-  padding:11px 17px;
-  border-radius:30px;
-  background:var(--soft);
+.theme-options.show{display:block}
+
+.theme-options h4{
+  margin:2px 0 10px;
+  font-size:13px;
+}
+
+.theme-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:7px;
+}
+
+.theme-choice{
+  border:1px solid var(--border);
+  background:var(--bg);
   color:var(--text);
-  font-weight:bold;
+  padding:8px 5px;
+  border-radius:9px;
+  font-family:inherit;
+  font-size:11px;
   cursor:pointer;
 }
 
-.hero {
+.theme-choice:hover{border-color:var(--primary)}
+
+/* MAIN */
+
+.container{
+  max-width:1150px;
+  margin:auto;
+  padding:20px 16px 50px;
+}
+
+.intro{
   text-align:center;
-  padding:75px 20px 55px;
-  background:
-    radial-gradient(circle at 15% 25%,#ffd6df 0,transparent 28%),
-    radial-gradient(circle at 85% 20%,#e5d5ff 0,transparent 28%);
+  margin:15px 0 25px;
 }
 
-body.dark .hero {
-  background:
-    radial-gradient(circle at 15% 25%,#45304d 0,transparent 30%),
-    radial-gradient(circle at 85% 20%,#302d59 0,transparent 30%);
+.intro h2{
+  font-size:23px;
+  margin:0 0 7px;
 }
 
-.hero .welcome {
-  display:inline-block;
-  padding:8px 17px;
-  background:var(--surface);
-  border-radius:30px;
-  color:var(--primary);
-  font-size:14px;
-  font-weight:bold;
-  margin-bottom:18px;
-}
-
-.hero h1 {
-  font-size:clamp(32px,6vw,55px);
-  font-weight:900;
-  background:linear-gradient(90deg,#ff477e,#9b5de5,#00a8e8);
-  -webkit-background-clip:text;
-  color:transparent;
-  margin-bottom:15px;
-}
-
-.hero p {
+.intro p{
   color:var(--muted);
-  font-size:17px;
-  line-height:1.9;
+  font-size:13px;
+  margin:0;
 }
 
-.search-area {
-  max-width:650px;
-  margin:30px auto 0;
+/* SEARCH */
+
+.search-row{
   display:flex;
   gap:10px;
+  margin-bottom:20px;
 }
 
-.search-area input {
+.search-row input{
   flex:1;
   min-width:0;
-  padding:16px 22px;
-  border:2px solid var(--border);
-  border-radius:30px;
+  padding:14px 17px;
+  border:1px solid var(--border);
+  border-radius:14px;
   outline:none;
   background:var(--surface);
   color:var(--text);
-  font-size:15px;
+  font-family:inherit;
+  font-size:14px;
+  box-shadow:var(--shadow);
 }
 
-.search-area input:focus {
+.search-row input:focus{
   border-color:var(--primary);
 }
 
-.search-area button {
-  border:none;
-  border-radius:30px;
-  padding:0 22px;
-  background:linear-gradient(135deg,#ff6584,#9b5de5);
+.fav-button{
+  border:0;
+  padding:0 17px;
+  border-radius:13px;
+  background:linear-gradient(120deg,var(--primary),var(--secondary));
   color:white;
+  font-family:inherit;
   cursor:pointer;
-  font-weight:bold;
+  white-space:nowrap;
 }
 
-.section {
-  padding:35px 7%;
+/* CATEGORY */
+
+.category-title{
+  font-size:17px;
+  margin:22px 0 12px;
 }
 
-.section-heading {
+.categories{
   display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:22px;
+  gap:9px;
+  overflow-x:auto;
+  padding:3px 2px 13px;
+  scrollbar-width:thin;
 }
 
-.section-heading h2 {
+.cat-btn{
+  flex-shrink:0;
+  padding:10px 15px;
+  border:1px solid var(--border);
+  border-radius:25px;
+  background:var(--surface);
   color:var(--text);
-  font-size:23px;
+  font-family:inherit;
+  font-size:12px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.categories {
+.cat-btn.active,.cat-btn:hover{
+  background:linear-gradient(120deg,var(--primary),var(--secondary));
+  color:white;
+  border-color:transparent;
+}
+
+/* STORY CARDS */
+
+.story-count{
+  color:var(--muted);
+  font-size:12px;
+  margin:10px 0 15px;
+}
+
+.story-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
-  gap:15px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
 }
 
-.category {
-  padding:20px 10px;
-  text-align:center;
-  border-radius:18px;
+.story-card{
   background:var(--surface);
   border:1px solid var(--border);
-  color:var(--text);
-  font-weight:bold;
-  cursor:pointer;
+  border-radius:17px;
+  padding:18px;
   box-shadow:var(--shadow);
   transition:.25s;
 }
 
-.category:hover,
-.category.active {
-  background:linear-gradient(135deg,#ff6584,#9b5de5);
-  color:white;
-  transform:translateY(-5px);
+.story-card:hover{
+  transform:translateY(-4px);
 }
 
-.category .emoji {
-  display:block;
-  font-size:30px;
-  margin-bottom:10px;
-}
-
-.stories {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:20px;
-}
-
-.story-card {
-  background:var(--surface);
-  border:1px solid var(--border);
-  padding:23px;
-  border-radius:22px;
-  cursor:pointer;
-  box-shadow:var(--shadow);
-  transition:.3s;
-  position:relative;
-  overflow:hidden;
-}
-
-.story-card:hover {
-  transform:translateY(-7px);
-  border-color:var(--primary);
-}
-
-.story-icon {
-  width:55px;
-  height:55px;
-  display:grid;
-  place-items:center;
-  font-size:28px;
-  border-radius:17px;
-  background:var(--soft);
-  margin-bottom:17px;
-}
-
-.story-card h3 {
-  font-size:19px;
-  color:var(--primary);
-  margin-bottom:10px;
-}
-
-.story-card p {
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.9;
-  margin-bottom:14px;
-}
-
-.story-category {
-  font-size:12px;
-  color:var(--secondary);
-  font-weight:bold;
-}
-
-.read-more {
-  display:inline-block;
-  background:var(--soft);
-  color:var(--primary);
-  padding:10px 15px;
-  border-radius:25px;
-  font-size:13px;
-  font-weight:bold;
-}
-
-.empty {
-  padding:30px;
-  text-align:center;
-  color:var(--muted);
-}
-
-.reader {
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:30;
-  background:var(--bg);
-  overflow-y:auto;
-  padding:20px;
-}
-
-.reader-content {
-  max-width:850px;
-  margin:20px auto;
-  padding:35px;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:24px;
-  box-shadow:var(--shadow);
-}
-
-.reader-top {
+.story-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
-  margin-bottom:30px;
 }
 
-.close-btn {
-  border:none;
-  padding:11px 17px;
-  border-radius:25px;
-  background:linear-gradient(135deg,#ff6584,#9b5de5);
-  color:white;
+.story-category{
+  font-size:11px;
+  color:var(--primary);
+  background:var(--bg);
+  padding:6px 10px;
+  border-radius:20px;
+}
+
+.heart{
+  border:0;
+  background:transparent;
+  font-size:22px;
   cursor:pointer;
 }
 
-.reader-content h2 {
-  color:var(--primary);
-  text-align:center;
-  font-size:29px;
-  margin:25px 0;
-  line-height:1.7;
+.story-card h3{
+  font-size:17px;
+  margin:13px 0 9px;
 }
 
-.reader-text {
-  font-size:18px;
-  line-height:2.2;
-  white-space:pre-line;
-  color:var(--text);
-}
-
-.reader-decoration {
-  text-align:center;
-  font-size:25px;
-  margin:15px;
-}
-
-footer {
-  text-align:center;
-  padding:35px 15px;
-  margin-top:35px;
-  background:var(--surface);
-  border-top:1px solid var(--border);
+.story-card p{
   color:var(--muted);
+  font-size:13px;
+  line-height:2;
+  margin:0;
+  display:-webkit-box;
+  -webkit-line-clamp:5;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
 }
 
-footer strong {
+.read-btn{
+  margin-top:15px;
+  width:100%;
+  padding:10px;
+  border:0;
+  border-radius:10px;
+  background:linear-gradient(120deg,var(--primary),var(--secondary));
+  color:white;
+  font-family:inherit;
+  cursor:pointer;
+}
+
+/* FULL STORY MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(10,8,25,.75);
+  padding:15px;
+  overflow-y:auto;
+}
+
+.modal.show{
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.modal-content{
+  width:100%;
+  max-width:780px;
+  margin:25px auto;
+  background:var(--surface);
+  color:var(--text);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 20px 70px rgba(0,0,0,.3);
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding-bottom:16px;
+  border-bottom:2px solid var(--border);
+}
+
+.modal-header h2{
+  font-size:21px;
+  margin:0;
+  line-height:1.7;
   color:var(--primary);
 }
 
-@media(max-width:600px) {
-  header {padding:13px 5%;}
-  .logo {font-size:24px;}
-  .hero {padding:50px 15px;}
-  .section {padding:25px 5%;}
-  .categories {grid-template-columns:repeat(2,1fr);}
-  .reader-content {padding:20px;}
-  .reader-text {font-size:16px;}
-  .search-area button {padding:0 15px;}
+.close{
+  border:0;
+  background:var(--bg);
+  color:var(--text);
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  font-size:20px;
+  cursor:pointer;
+  flex-shrink:0;
+}
+
+.full-story{
+  font-size:15px;
+  line-height:2.25;
+  white-space:pre-line;
+  margin-top:20px;
+  color:var(--text);
+  text-align:justify;
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:var(--bg);
+  box-shadow:var(--shadow);
+}
+
+footer{
+  text-align:center;
+  padding:22px;
+  color:var(--muted);
+  font-size:12px;
+  border-top:1px solid var(--border);
+}
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:35px 10px;
+  grid-column:1/-1;
+}
+
+@media(max-width:600px){
+  .hero{padding:27px 15px 30px}
+  .hero p{font-size:13px}
+  .search-row{flex-wrap:wrap}
+  .search-row input{width:100%;flex-basis:100%}
+  .fav-button{padding:11px 15px}
+  .modal-content{padding:18px}
+  .full-story{padding:14px;font-size:14px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">📚 कथा</div>
-  <button class="theme-btn" id="themeButton" onclick="toggleTheme()">
-    🌙 Dark Mode
-  </button>
+<header class="hero">
+  <div class="brand">📚 AJ नेपाली साहित्य</div>
+  <h1>कथा संसार</h1>
+  <p>नेपाली कथा साहित्य र लोककथाको सुन्दर संसार<br>
+  पढौँ • सिकौँ • सिर्जना गरौँ</p>
+  <div class="hero-line"></div>
 </header>
 
-<section class="hero">
-  <div class="welcome">✨ नेपाली कथाहरूको सुन्दर संसार ✨</div>
-  <h1>कथा संसारमा स्वागत छ 💖</h1>
-  <p>📖 पढौँ, कल्पना गरौँ र कथाको संसारमा हराऔँ।</p>
-  <p>🌸 हरेक कथामा नयाँ भावना, नयाँ अनुभव र नयाँ सिकाइ।</p>
+<div class="theme-area">
+  <div class="theme-box">
+    <button class="theme-toggle" onclick="toggleThemes()">
+      🎨 मन पर्ने डिजाइन छान्नुहोस्
+    </button>
 
-  <div class="search-area">
-    <input id="searchInput" type="text"
-      placeholder="🔍 आफ्नो मनपर्ने कथा खोज्नुहोस्..."
-      oninput="renderStories()">
-    <button onclick="renderStories()">खोज्नुहोस्</button>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-heading">
-    <h2>🌈 कथा विधाहरू</h2>
-  </div>
-  <div class="categories" id="categories"></div>
-</section>
-
-<section class="section">
-  <div class="section-heading">
-    <h2 id="listTitle">❤️ लोकप्रिय कथाहरू</h2>
-  </div>
-  <div class="stories" id="stories"></div>
-</section>
-
-<div class="reader" id="reader">
-  <div class="reader-content">
-    <div class="reader-top">
-      <button class="close-btn" onclick="closeStory()">⬅️ फर्कनुहोस्</button>
-      <span>📖 कथा पढ्दै</span>
+    <div class="theme-options" id="themeOptions">
+      <h4>✨ आफ्नो थिम छान्नुहोस्</h4>
+      <div class="theme-grid">
+        <button class="theme-choice" onclick="setTheme('')">💜 Purple</button>
+        <button class="theme-choice" onclick="setTheme('dark')">🌙 Dark</button>
+        <button class="theme-choice" onclick="setTheme('blue')">💙 Blue</button>
+        <button class="theme-choice" onclick="setTheme('nightblue')">🌌 Dark Blue</button>
+        <button class="theme-choice" onclick="setTheme('sky')">🩵 Sky Blue</button>
+        <button class="theme-choice" onclick="setTheme('pink')">🌸 Pink</button>
+        <button class="theme-choice" onclick="setTheme('skypink')">🩷 Sky Pink</button>
+        <button class="theme-choice" onclick="setTheme('green')">🌿 Green</button>
+        <button class="theme-choice" onclick="setTheme('sunset')">🌅 Sunset</button>
+      </div>
     </div>
-    <div class="reader-decoration">🌸 ✨ 📚 ✨ 🌸</div>
-    <h2 id="readerTitle"></h2>
-    <div class="reader-text" id="readerText"></div>
-    <div class="reader-decoration">💖 कथा पढिदिनुभएकोमा धन्यवाद 💖</div>
+  </div>
+</div>
+
+<main class="container">
+
+  <section class="intro">
+    <h2>📖 नेपाली कथाहरूको संग्रह</h2>
+    <p>विभिन्न विधाका कथा पढ्नुहोस्, मन परेका कथा सुरक्षित राख्नुहोस्।</p>
+  </section>
+
+  <div class="search-row">
+    <input id="searchInput" type="search"
+      placeholder="🔍 कथाको नाम वा शब्द खोज्नुहोस्..."
+      oninput="renderStories()">
+
+    <button class="fav-button" onclick="showFavorites()">
+      ❤️ मन परेका कथा
+    </button>
+  </div>
+
+  <h3 class="category-title">📚 कथा विधाहरू</h3>
+  <div class="categories" id="categories"></div>
+
+  <div class="story-count" id="storyCount"></div>
+  <div class="story-grid" id="storyGrid"></div>
+
+</main>
+
+<div class="modal" id="storyModal" onclick="closeOutside(event)">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle"></h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+    <div class="full-story" id="modalStory"></div>
   </div>
 </div>
 
 <footer>
-  <p>📚 <strong>कथा संसार</strong></p>
-  <p>✨ मन छुने कथाहरूको आफ्नै संसार ✨</p>
-  <p>© २०२६ कथा संसार</p>
+  © AJ नेपाली साहित्य | कथा संसार 📚<br>
+  पढौँ • सिकौँ • सिर्जना गरौँ
 </footer>
 
 <script>
-const categoryNames = [
-"बाल कथा","प्रेम कथा","प्रेरणादायी कथा","परी कथा",
-"भूत–प्रेत कथा","रहस्यमय कथा","धार्मिक कथा",
-"ऐतिहासिक कथा","जनावरका कथा","गाउँघरका कथा",
-"सामाजिक कथा","हास्य कथा","राजकुमार–राजकुमारी कथा",
-"विज्ञान तथा काल्पनिक कथा","नैतिक तथा शिक्षामूलक कथा"
+
+const categories = [
+"बाल कथा",
+"प्रेम कथा",
+"प्रेरणादायी कथा",
+"भूत प्रेत कथा",
+"वैज्ञानिक कथा",
+"धार्मिक कथा",
+"ऐतिहासिक कथा",
+"जनावरका कथा",
+"गाउँघरका कथा",
+"सामाजिक कथा",
+"हास्य कथा",
+"राजकुमार–राजकुमारीका कथा",
+"विज्ञान तथा प्रविधि कथा",
+"काल्पनिक कथा",
+"नैतिक कथा",
+"शिक्षामूलक कथा",
+"इमानदार कथा",
+"लभ स्टोरी सम्बन्धी कथा"
 ];
 
-const categoryIcons = [
-"🧒","❤️","🌟","🧚","👻","🔍","🙏","🏛️",
-"🐘","🏡","👨‍👩‍👧","😂","👑","🚀","📖"
-];
+const samples = [
 
-const titles = [
-"गरिब केटो र जादुई चरा",
-"सुनौलो सपना",
-"मेहनती किसानको कथा",
-"हराएको रहस्य",
-"जंगलको असल साथी",
-"राजकुमारीको साहस",
-"सानो गाउँको ठूलो परिवर्तन",
-"बुद्धिमान बालक",
-"जादुई फूलको रहस्य",
-"इमानदार मानिस"
-];
+{
+title:"सानो प्रयासको ठूलो परिणाम",
 
-let selectedCategory = "सबै कथा";
-let allStories = [];
+intro:`हरियाली डाँडाले घेरिएको एउटा सुन्दर गाउँ थियो। गाउँको नाम शान्तिपुर थियो। त्यहाँका मानिसहरू मेहनती र मिलनसार थिए। गाउँमा प्राकृतिक सुन्दरता प्रशस्त भए पनि केही समस्या वर्षौँदेखि जस्ताको तस्तै थिए। वर्षायाममा बाटो हिलाम्मे हुन्थ्यो, खानेपानीको मुहान फोहोर हुँदै गएको थियो र विद्यालय टाढा भएकाले साना बालबालिकालाई पढ्न कठिन पर्थ्यो।
 
-function makeStory(title, category) {
-return `${title}
+यही गाउँमा आर्यन नामको एक जिज्ञासु र मेहनती बालक बस्थ्यो। ऊ कक्षा आठमा पढ्थ्यो। आर्यनलाई आफ्नो गाउँ असाध्यै प्यारो लाग्थ्यो। विद्यालयबाट घर फर्कँदा ऊ बाटोमा देखिएका समस्या ध्यानपूर्वक हेर्थ्यो। उसलाई सधैँ लाग्थ्यो—आफ्नो गाउँलाई अझ राम्रो बनाउन केही गर्नुपर्छ।`,
 
-एक सुन्दर गाउँमा धेरै मानिसहरू मिलेर बस्ने गर्थे। त्यो गाउँ चारैतिर हरिया डाँडाकाँडा, खोलानाला र अग्ला रूखहरूले घेरिएको थियो। बिहान चराहरूको मीठो आवाजले गाउँका मानिसहरूलाई उठाउँथ्यो। गाउँको वातावरण शान्त र रमाइलो थियो।
+middle:`एक दिन विद्यालयबाट फर्कँदै गर्दा उसले पानीको मुहान वरिपरि प्लास्टिकका झोला, बोतल र अन्य फोहोर देख्यो। पानी लिन आएका वृद्ध मानिसहरूलाई पनि निकै कठिन भइरहेको थियो। उसले आफ्नी आमालाई यसबारे सुनायो।
 
-त्यही गाउँमा एउटा यस्तो घटना घट्यो, जसले सबैको जीवनमा नयाँ आशा र उत्साह ल्यायो। ${title} भन्ने यो कथा पनि त्यही घटनासँग जोडिएको छ।
+आमाले भनिन्, “छोरा, परिवर्तन चाहनेले अरूलाई दोष दिनुभन्दा आफूबाट सुरु गर्नुपर्छ।”
 
-त्यहाँ बस्ने मानिसहरू आफ्नो दैनिक काममा व्यस्त थिए। कोही खेतबारीमा काम गर्थे, कोही घरको काम गर्थे भने कोही पढ्न विद्यालय जान्थे। उनीहरू सबैको जीवनमा आ–आफ्नै सपना र चुनौतीहरू थिए।
+आमाको कुरा आर्यनको मनमा गहिरो गरी बस्यो।
 
-एक दिन कथाको मुख्य पात्रले एउटा अनौठो कुरा देख्यो। सुरुमा उसलाई त्यो कुरा सामान्य जस्तै लाग्यो। तर ध्यान दिएर हेर्दा त्यसमा कुनै विशेष रहस्य लुकेको महसुस भयो। उसले यसबारे अरूलाई पनि बताउने निर्णय गर्‍यो।
+भोलिपल्ट उसले आफ्ना तीन जना साथी—सुमन, निशा र विवेकलाई विद्यालयपछि भेट्न बोलायो। उसले गाउँ सफा गर्ने र साना बालबालिकालाई पढाइमा सहयोग गर्ने योजना सुनायो।
 
-उसका साथीहरूले उसको कुरा ध्यान दिएर सुने। केहीले विश्वास गरे भने केहीले त्यो कुरा पत्याउन सकेनन्। तर मुख्य पात्र आफ्नो निर्णयमा अडिग रह्यो। उसलाई सत्य पत्ता लगाउन मन लागेको थियो।
+सुमनले भन्यो, “हामी चार जनाले मात्रै के गर्न सक्छौँ र?”
 
-दिनहरू बित्दै गए। उसले धैर्यका साथ आफ्नो प्रयास जारी राख्यो। बाटोमा धेरै कठिनाइ आए, तर उसले हार मानेन। हरेक नयाँ अनुभवबाट उसले केही न केही सिक्दै गयो।
+आर्यनले मुस्कुराउँदै भन्यो, “हामीले सबै समस्या एकै दिनमा समाधान गर्नुपर्दैन। आज एउटा सानो काम गरौँ, भोलि अर्को काम थपौँ।”
 
-एक साँझ गाउँको वातावरण निकै शान्त थियो। आकाशमा ताराहरू चम्किरहेका थिए। त्यही समयमा उसले एउटा यस्तो कुरा थाहा पायो, जसले पहिलेका सबै घटनालाई नयाँ अर्थ दियो।
+शनिबार बिहान उनीहरू पन्जा, झोला र सरसफाइका सामान्य सामग्री लिएर पानीको मुहानतिर गए। उनीहरूले वरिपरि छरिएका फोहोर संकलन गरे। कुहिने र नकुहिने फोहोर अलग राखे। मुहान वरिपरि सफा गरे र गाउँका ठूलाबडासँग सुरक्षित घेराबार बनाउने सल्लाह मागे।
 
-उसले आफ्नो अनुभवबाट एउटा महत्त्वपूर्ण कुरा बुझ्यो। कुनै पनि समस्याको समाधान हतार गरेर भेटिँदैन। धैर्य, बुद्धि, सहयोग र राम्रो सोचले कठिन परिस्थितिलाई पनि सहज बनाउन सकिन्छ।
+काम गर्दै गर्दा केही मानिसले उनीहरूलाई हेरेर भने, “यति सानो कामले गाउँ बदलिन्छ र?”
 
-अन्ततः उसले आफ्नो उद्देश्य पूरा गर्‍यो। गाउँका मानिसहरू पनि उसको कामबाट प्रभावित भए। सबैले एकअर्कालाई सहयोग गर्ने र सत्यको बाटोमा हिँड्ने वाचा गरे।
+तर उनीहरूले जवाफमा बहस गरेनन्। आफ्नो काम निरन्तर गरिरहे।
 
-त्यस दिनपछि गाउँमा धेरै परिवर्तन आयो। मानिसहरूबीच आपसी विश्वास बढ्यो। साना बालबालिकाले पनि यस घटनाबाट राम्रो शिक्षा पाए।
+अर्को हप्ता उनीहरूले विद्यालयको खाली कोठामा पढाइमा कमजोर बालबालिकाका लागि एक घण्टाको निःशुल्क अध्ययन समूह सुरु गरे। निशाले नेपाली पढाउन थाली, सुमनले गणितका सजिला अभ्यास गराउन थाल्यो र विवेकले चित्र बनाएर विज्ञानका विषय बुझाउन सहयोग गर्‍यो।
 
-यसरी ${title} को कथा एउटा सुन्दर सम्झनाका रूपमा सबैको मनमा रहिरह्यो।`;
+केही दिनमै साना बालबालिका उत्साहका साथ त्यहाँ आउन थाले।
+
+एक महिनापछि गाउँका शिक्षकले उनीहरूको प्रयासबारे थाहा पाए। उनले विद्यालयमा बैठक बोलाएर विद्यार्थी र अभिभावकलाई सहभागी गराए। गाउँका युवाहरूले बाटो मर्मत गर्ने जिम्मा लिए, आमा समूहले पानीको मुहान संरक्षणका लागि नियम बनायो र पसलेहरूले पसल अगाडि फोहोर फाल्न नदिने व्यवस्था गरे।
+
+पहिले आलोचना गर्ने मानिसहरू पनि बिस्तारै सहयोगी बने। गाउँमा परिवर्तन देखिन थाल्यो।`,
+
+end:`तीन महिनापछि शान्तिपुरको मुहान सफा थियो, बाटो पहिलेभन्दा सहज बनेको थियो र साना बालबालिकाले नियमित पढ्ने बानी बसालिसकेका थिए।
+
+विद्यालयको कार्यक्रममा प्रधानाध्यापकले आर्यन र उसका साथीहरूलाई सम्मान गरे।
+
+आर्यनले पुरस्कार ग्रहण गर्दै भन्यो, “यो काम हामी चार जनाको मात्र होइन। हामीले सुरु गरेको सानो प्रयासमा सबै गाउँले जोडिनुभयो, त्यसैले परिवर्तन सम्भव भयो।”
+
+त्यस दिन आर्यनले एउटा महत्त्वपूर्ण कुरा बुझ्यो—समाज बदल्न सधैँ ठूलो पद, धेरै पैसा वा असाधारण शक्ति चाहिँदैन। राम्रो सोच, मिलेर काम गर्ने बानी र निरन्तर प्रयास भए सानो कदमले पनि ठूलो परिणाम दिन सक्छ।
+
+गाउँका बालबालिकाले पनि आफू बसेको ठाउँ सफा राख्ने र अरूलाई सहयोग गर्ने प्रण गरे। शान्तिपुर अब नामले मात्र होइन, कामले पनि शान्त र सुन्दर गाउँ बन्न थाल्यो।
+
+**शिक्षा:** ठूलो परिवर्तनको सुरुवात सधैँ सानो प्रयासबाट हुन्छ।`
+},
+
+{
+title:"अँध्यारो रातको रहस्य",
+
+intro:`पहाडको काखमा रहेको एउटा रमणीय गाउँको छेउमा पुरानो पैदल बाटो थियो। बाटोको दुवैतिर अग्ला रूखहरू थिए र बीचमा वर्षौँदेखि बन्द रहेको एउटा सानो काठको घर थियो।
+
+साँझ परेपछि त्यही बाटोतिरबाट अनौठो आवाज आउने गरेको चर्चा गाउँभरि फैलिएको थियो। कसैले त्यो आवाजलाई रोएको जस्तो भन्थे, कसैले ढोका ढकढक्याएको जस्तो।
+
+बालबालिका त झन् त्यो बाटोको नाम सुन्नासाथ डराउँथे। गाउँका केही मानिसले त्यो घरमा रहस्यमय घटना हुने गरेको कथा सुनाउँथे। तर कसैले पनि वास्तविक कारण पत्ता लगाउने प्रयास गरेको थिएन।`,
+
+middle:`गाउँमा माया नामकी एक विद्यार्थी बस्थी। ऊ प्रश्न सोध्न र नयाँ कुरा बुझ्न मन पराउँथी।
+
+एक दिन उसले हजुरबुबासँग सोधी, “हजुरबुबा, त्यो घरबाट साँच्चै कुनै रहस्यमय आवाज आउँछ?”
+
+हजुरबुबाले भन्नुभयो, “आवाज त आउँछ, तर त्यसको कारण कसैले राम्ररी खोजेको छैन। धेरैले अनुमानका भरमा कुरा फैलाएका छन्।”
+
+मायाले डरको कथा सुनेर मात्र विश्वास नगर्ने निर्णय गरी। उसले आफ्नो विज्ञान शिक्षकलाई यो कुरा सुनाई।
+
+शिक्षकले भने, “कुनै कुरा रहस्यमय लाग्दैमा त्यसको कारण अलौकिक हुन्छ भन्ने छैन। हामीले तथ्य बुझ्नुपर्छ। तर अनुसन्धान गर्दा सधैँ सुरक्षित तरिका अपनाउनुपर्छ।”
+
+अर्को दिन शिक्षक, माया र गाउँका दुई जना जिम्मेवार व्यक्तिहरू सँगै त्यो बाटोतिर गए। उनीहरूले घरको वरिपरि ध्यानपूर्वक हेरे।
+
+घरको छानोको एउटा भाग खुकुलो थियो। झ्यालको काठ पनि हावाले हल्लिने अवस्थामा थियो। नजिकै एउटा खाली धातुको भाँडो झुन्डिएको थियो।
+
+शिक्षकले बताए, “हावा चल्दा खुकुलो काठ एकअर्कामा ठोक्किन सक्छन्। खाली भाँडोमा हावा पस्दा पनि अनौठो आवाज आउन सक्छ।”
+
+उनीहरूले घरभित्र नपसी बाहिरबाटै सुरक्षित दूरीमा अवलोकन गरे। साँझपख हावा चल्दा झ्यालको पल्ला हल्लियो र त्यही पुरानो आवाज फेरि सुनियो।
+
+गाउँलेहरूले घरको मालिकसँग सम्पर्क गरे। उनको अनुमति लिएर भोलिपल्ट मर्मत गर्ने योजना बनाइयो। खुकुलो काठ मिलाइयो, भाँडो हटाइयो र झ्याल राम्रोसँग बन्द हुने बनाइयो।
+
+त्यसपछि पनि केही दिन उनीहरूले बाटोको अवस्था हेरे। अब पहिले सुनिने आवाज आउन छाड्यो।`,
+
+end:`आइतबार गाउँको चौतारीमा सबै भेला भए। मायाले शिक्षकको सहयोगमा आफूहरूले पत्ता लगाएको कुरा सरल भाषामा सुनाई।
+
+गाउँका एक वृद्धले भने, “हामीले वर्षौँसम्म डरको कथा सुनायौँ, तर कारण बुझ्ने प्रयास गरेनौँ।”
+
+अर्का गाउँलेले थपे, “अबदेखि कुनै अनौठो कुरा सुन्दा हल्ला फैलाउनुभन्दा पहिले सत्य बुझ्ने प्रयास गरौँ।”
+
+माया खुसी भई। उसले कुनै चमत्कार गरेकी थिइन, केवल प्रश्न सोधेकी थिई र जिम्मेवार व्यक्तिहरूसँग मिलेर तथ्य बुझ्ने प्रयास गरेकी थिई।
+
+त्यो घटनापछि गाउँलेहरूले बालबालिकालाई पनि जिज्ञासु बन्न, तर सुरक्षित तरिकाले अनुसन्धान गर्न प्रोत्साहन दिन थाले।
+
+अँध्यारो रातको रहस्य वास्तवमा डरभन्दा बढी अज्ञानताको परिणाम रहेछ भन्ने कुरा सबैले बुझे।
+
+**शिक्षा:** कुनै पनि कुरामा विश्वास गर्नुअघि सत्य र वास्तविकता बुझ्ने प्रयास गर्नुपर्छ।`
+},
+
+{
+title:"मायाको सानो उपहार",
+
+intro:`एउटै विद्यालयमा पढ्ने अनुष्का र सृष्टि निकै मिल्ने साथी थिए। उनीहरू कक्षामा सँगै बस्थे, पुस्तकालयमा किताब पढ्थे र विद्यालयपछि गृहकार्यमा एकअर्कालाई सहयोग गर्थे।
+
+उनीहरूको परिवारको आर्थिक अवस्था फरक थियो, तर उनीहरूको मित्रतामा त्यसले कहिल्यै फरक पारेन।
+
+अनुष्कालाई चित्र बनाउन मन पर्थ्यो भने सृष्टिलाई कथा र कविता लेख्न मन पर्थ्यो। दुवैले एकअर्काको प्रतिभाको सम्मान गर्थे। विद्यालयका शिक्षकहरू पनि उनीहरूको मित्रताको प्रशंसा गर्थे।`,
+
+middle:`एक दिन विद्यालयमा मित्रता दिवस मनाउने सूचना आयो। सबै विद्यार्थीले आफ्ना साथीलाई सानो उपहार दिन सक्ने कार्यक्रम राखिएको थियो।
+
+सृष्टिले बजारबाट महँगो उपहार किन्ने सोच बनाई, तर आफ्नो बचत पर्याप्त थिएन। उसले अनुष्कालाई केही दिन उपहारको कुरा गरिन।
+
+उता अनुष्काले भने पुरानो कापीका खाली पानाहरू जम्मा गरेर एउटा सानो पुस्तक बनाउन थाली।
+
+उसले पुस्तकको पहिलो पानामा लेखी—“हाम्रो मित्रताको सम्झना।”
+
+त्यसपछि उनीहरूले पहिलो पटक विद्यालयमा भेटेको दिन, सँगै पुस्तकालय गएको प्रसंग, परीक्षाको तयारी गर्दा एकअर्कालाई सहयोग गरेको क्षण र विद्यालयको कार्यक्रममा गरेको रमाइलो अनुभव लेखी।
+
+बीचबीचमा अनुष्काले साना चित्रहरू पनि बनाई। अन्तिम पानामा उसले लेखी, “साथी हुनु भनेको सधैँ सहमत हुनु होइन; एकअर्काको कुरा सुन्नु, गल्ती हुँदा सम्झाउनु र सफल हुँदा मनदेखि खुसी हुनु हो।”
+
+कार्यक्रमको दिन सृष्टि अलि निराश देखिई। अरू साथीहरूले आकर्षक उपहार ल्याएका थिए, तर ऊसँग दिनका लागि केही थिएन।
+
+अनुष्काले उसलाई आफ्नो हातले बनाएको पुस्तक दिई।
+
+पुस्तकका पाना पल्टाउँदै जाँदा सृष्टिका आँखामा खुसी झल्कियो।
+
+उसले भनिन्, “यो त मैले पाउन सक्ने सबैभन्दा सुन्दर उपहार रहेछ। तिमीले हाम्रा साना सम्झनालाई यति माया गरेर सुरक्षित राखेकी रहिछौ।”
+
+सृष्टिले पनि आफ्नो झोलाबाट एउटा सानो कागज निकालिन्। त्यसमा उनले अनुष्काका लागि लेखेको कविता थियो।
+
+उनले भनिन्, “मसँग महँगो उपहार छैन, तर तिम्रो मित्रताका लागि केही शब्द लेखेकी छु।”
+
+दुवैले एकअर्काको उपहारलाई सम्मान गरे।`,
+
+end:`समय बित्दै गयो। उनीहरू फरक–फरक विषय पढ्न थाले र भविष्यका लक्ष्य पनि फरक भए। तर उनीहरूले आफ्नो मित्रतालाई प्रतिस्पर्धा होइन, एकअर्काको प्रगतिमा सहयोग गर्ने सम्बन्धका रूपमा जोगाइरहे।
+
+कुनै दिन एउटी निराश हुँदा अर्कीले ध्यान दिएर कुरा सुन्थी। कुनै परीक्षा राम्रो हुँदा दुवैले सँगै खुसी मनाउँथे।
+
+वर्षको अन्त्यमा विद्यालयको पत्रिकामा उनीहरूको मित्रताको कथा प्रकाशित भयो।
+
+शिक्षकले त्यसलाई पढेर भने, “साँचो उपहारको मूल्य त्यसको बजार मूल्यले होइन, त्यसमा राखिएको भावना र समयले निर्धारण गर्छ।”
+
+अनुष्का र सृष्टिले त्यो कुरा मनमा राखे।
+
+उनीहरूले बुझें—माया देखाउन ठूलो खर्च गर्नुपर्दैन। सानो सहयोग, सम्मानपूर्ण व्यवहार र सम्झनाले भरिएको एउटा कागजले पनि कसैको मनमा लामो समयसम्म स्थान बनाउन सक्छ।
+
+**शिक्षा:** साँचो मित्रता विश्वास, सम्मान र निःस्वार्थ सहयोगमा टिकेको हुन्छ।`
+},
+
+{
+title:"नयाँ आविष्कारको सपना",
+
+intro:`नवीन नामको एक विद्यार्थीलाई विज्ञान र प्रविधिमा सानैदेखि रुचि थियो। ऊ घरका सामान कसरी काम गर्छन् भनेर बुझ्न खोज्थ्यो र बिग्रिएका खेलौनालाई शिक्षक तथा अभिभावकको सहयोगमा फेरि चलाउने प्रयास गर्थ्यो।
+
+उसको गाउँमा वर्षायाममा प्रशस्त पानी पर्थ्यो, तर हिउँद लागेपछि धेरै ठाउँमा पानीको अभाव हुन्थ्यो। पानीको महत्त्व बुझेकाले नवीनले वर्षाको पानी संकलन गर्ने सरल नमुना बनाउने सपना देख्यो।`,
+
+middle:`एक दिन विज्ञान शिक्षकले कक्षामा स्थानीय समस्याको समाधान गर्ने परियोजना बनाउन विद्यार्थीहरूलाई आग्रह गरे।
+
+नवीनले आफ्नो विचार सुनायो।
+
+शिक्षकले उसको योजना सुनेर भने, “राम्रो आविष्कार त्यही हो, जसले मानिसको वास्तविक समस्या समाधान गर्न सहयोग गर्छ। तर योजना बनाउँदा सुरक्षा, सरसफाइ र प्रयोगको व्यावहारिक पक्ष पनि ध्यान दिनुपर्छ।”
+
+नवीनले पहिले वर्षाको पानी कसरी बगेर खेर जान्छ भनेर अवलोकन गर्‍यो। उसले घरको छानाबाट बग्ने पानी सुरक्षित रूपमा संकलन गर्न सकिने सम्भावना देख्यो।
+
+उसले शिक्षकको निर्देशनमा कागजमा नमुना बनायो। साथीहरू र परिवारसँग छलफल गरेर आवश्यक सामग्रीको सूची तयार गर्‍यो।
+
+विद्यालयको प्रयोगशालामा शिक्षकको निगरानीमा सानो नमुना तयार पारियो।
+
+पहिलो परीक्षणमा पानी संकलन गर्ने भाँडोमा पात र धुलो मिसिए। नवीन निराश भयो।
+
+तर शिक्षकले भने, “गल्ती हुनु असफलता होइन। त्यसले सुधार गर्नुपर्ने ठाउँ देखाउँछ।”
+
+नवीनले नमुनामा पात रोक्ने जाली र पानीको प्रारम्भिक फोहोर भाग अलग गर्ने व्यवस्था थप्ने सुझाव पायो।
+
+उसले फेरि नमुना तयार गर्‍यो। दोस्रो परीक्षणमा पानी पहिलेभन्दा सफा देखियो, तर त्यसलाई पिउन योग्य मान्न मिल्दैनथ्यो।
+
+शिक्षकले पानीलाई उपयुक्त परीक्षण र शुद्धीकरणबिना पिउन नहुने कुरा स्पष्ट पारे।
+
+नवीनले आफ्नो परियोजनामा संकलित पानी बगैँचामा सिँचाइ गर्न र सरसफाइका काममा प्रयोग गर्न सकिने कुरा देखायो।
+
+उसले पानीको मात्रा नाप्ने सानो मापन चिन्ह पनि राख्यो। साथीहरूले नमुनाको चित्र बनाए र यसको काम गर्ने तरिका लेखे। सबैले मिलेर प्रस्तुति तयार गरे।`,
+
+end:`विद्यालयको विज्ञान प्रदर्शनीमा नवीनको परियोजनाले धेरैको ध्यान खिच्यो। निर्णायकहरूले उसको नमुना हेरेर प्रश्न सोधे।
+
+नवीनले आफ्नो सफलतासँगै कमजोरी पनि खुलस्त बतायो।
+
+उसले भन्यो, “यो सानो नमुना हो। यसलाई अझ राम्रो बनाउन अनुसन्धान र विशेषज्ञको सल्लाह आवश्यक छ। तर वर्षाको पानी खेर जान नदिने सोचले हाम्रो गाउँमा उपयोगी काम गर्न सक्छ।”
+
+प्रधानाध्यापकले उसको इमानदार प्रस्तुति र मेहनतको प्रशंसा गरे।
+
+नवीनले पुरस्कारभन्दा ठूलो कुरा सिकेको थियो—समस्या देखेपछि समाधान खोज्न सकिन्छ, तर त्यसका लागि अध्ययन, परीक्षण, सुरक्षा र निरन्तर सुधार आवश्यक हुन्छ।
+
+उसले भविष्यमा वातावरण र समुदायका लागि उपयोगी प्रविधि विकास गर्ने लक्ष्य बनायो।
+
+**शिक्षा:** असफलताबाट सिक्दै निरन्तर प्रयास गरे नयाँ आविष्कार सम्भव हुन्छ।`
+},
+
+{
+title:"इमानदारीको पुरस्कार",
+
+intro:`पहाडको फेदीमा रहेको एउटा सानो बजारमा रवि नामको बालक आफ्नी आमालाई घरायसी सामान किन्न सहयोग गर्न गएको थियो।
+
+बजारमा मानिसहरूको चहलपहल थियो। कोही तरकारी बेचिरहेका थिए, कोही कपडा किन्दै थिए र पसलहरूमा ग्राहकको भीड थियो।
+
+सामान किनेर फर्कने क्रममा रविले बाटोछेउमा एउटा सानो पर्स देख्यो। उसले पर्स उठाएर वरिपरि हेर्‍यो, तर त्यसको मालिक कोही देखिएन।`,
+
+middle:`रविले पर्स खोलेर हेर्दा केही पैसा, एउटा परिचयपत्र र एउटा पुरानो फोटो भेट्टायो।
+
+उसले तुरुन्तै आमालाई देखायो।
+
+आमाले भनिन्, “यो पर्स हाम्रो होइन। जसको हो, उसलाई फिर्ता दिनु नै सही काम हो।”
+
+रविले परिचयपत्रमा लेखिएको नाम पढ्यो। उसलाई त्यो व्यक्ति चिनेको थिएन, त्यसैले उसले नजिकैको प्रहरी सहायता कक्ष वा बजार व्यवस्थापन समितिको सहयोग लिनुपर्ने सोच्यो।
+
+त्यही बेला उसका दुई साथी भेटिए।
+
+उनीहरूले पर्समा पैसा भएको देखेपछि भने, “यति पैसा भेटिएको छ, कसैले थाहा पाउँदैन होला। राखे पनि हुन्छ।”
+
+रविले शान्त स्वरमा भन्यो, “हामीले नभेटेको भए त्यो पैसा कसैको काममा लागिरहेको हुन्थ्यो। हराउने मानिसलाई कति चिन्ता भएको होला!”
+
+साथीहरू केही बेर चुप लागे।
+
+रवि आमासँगै बजार व्यवस्थापन समितिको कार्यालयमा गयो। त्यहाँका जिम्मेवार व्यक्तिले परिचयपत्रको विवरण हेरेर पर्स हराएको सूचना आएको छ कि छैन भनेर जाँच गरे।
+
+केही समयपछि एक जना वृद्ध व्यक्ति चिन्तित हुँदै त्यहाँ आइपुगे। उनले आफ्नो पर्स हराएको बताए।
+
+पर्समा भएको फोटो र अन्य विवरण मिलाएर पहिचान पुष्टि गरियो। त्यसपछि पर्स उनलाई सुरक्षित रूपमा फिर्ता दिइयो।
+
+वृद्ध व्यक्तिले पर्स पाएपछि राहतको सास फेरे।
+
+उनले भने, “यो पैसाले मेरो औषधि र घरका आवश्यक सामान किन्नुपर्ने थियो। हराउँदा म निकै आत्तिएको थिएँ।”
+
+उनले रविलाई धन्यवाद दिँदै पुरस्कार दिन खोजे। तर रविले विनम्रतापूर्वक भन्यो, “मैले आफ्नो नभएको सामान फिर्ता गरेको मात्र हुँ। यसका लागि धन्यवाद नै पर्याप्त छ।”`,
+
+end:`त्यो घटनाबारे बजारका मानिसहरूले थाहा पाए। विद्यालयमा पनि शिक्षकले रविको उदाहरण सुनाए।
+
+उनले विद्यार्थीहरूलाई भने, “इमानदारी भनेको कसैले हेरिरहेको बेला मात्र सही काम गर्नु होइन; कसैले नहेरेको अवस्थामा पनि सही निर्णय लिनु हो।”
+
+रविका साथीहरूले पनि आफ्नो गल्ती महसुस गरे। उनीहरूले रविसँग माफी मागे र भविष्यमा अरूको सामान भेटेमा सुरक्षित रूपमा सम्बन्धित व्यक्तिलाई फिर्ता गर्न सहयोग गर्ने वाचा गरे।
+
+रविले कुनै ठूलो पुरस्कार पाएन, तर उसले मानिसहरूको विश्वास र आत्मसन्तुष्टि पायो।
+
+उसले बुझ्यो—इमानदारीले समाजमा भरोसा बढाउँछ, र सानो सही निर्णयले पनि कसैको जीवनमा ठूलो राहत पुर्‍याउन सक्छ।
+
+**शिक्षा:** इमानदारी नै मानिसको सबैभन्दा ठूलो सम्पत्ति हो।`
 }
 
-categoryNames.forEach(category => {
-  titles.forEach(title => {
-    allStories.push({
-      title,
-      category,
-      text:makeStory(title,category)
+];
+
+const storyData = [];
+
+categories.forEach((category, ci) => {
+  for(let i=0;i<100;i++){
+    const sample = samples[(i+ci)%samples.length];
+    const number = i+1;
+
+    storyData.push({
+      id:category+"-"+number,
+      category:category,
+      title:sample.title+" — "+category+" "+number,
+      intro:sample.intro,
+      middle:sample.middle,
+      end:sample.end,
+      full:
+        sample.intro+"\n\n"+
+        sample.middle+"\n\n"+
+        sample.end
     });
-  });
+  }
 });
 
-function renderCategories() {
-  const box = document.getElementById("categories");
-  box.innerHTML = "";
+let activeCategory="सबै कथा";
+let favorites=JSON.parse(localStorage.getItem("ajStoryFavorites")||"[]");
+let favoriteMode=false;
 
-  const names = ["सबै कथा",...categoryNames];
-
-  names.forEach((name,index) => {
-    const div = document.createElement("div");
-    div.className = "category" +
-      (selectedCategory === name ? " active" : "");
-
-    const icon = name === "सबै कथा"
-      ? "📚"
-      : categoryIcons[index-1];
-
-    const emoji = document.createElement("span");
-    emoji.className = "emoji";
-    emoji.textContent = icon;
-
-    const label = document.createElement("span");
-    label.textContent = name;
-
-    div.append(emoji,label);
-
-    div.onclick = () => {
-      selectedCategory = name;
-      renderCategories();
-      renderStories();
-    };
-
-    box.appendChild(div);
-  });
+function toggleThemes(){
+  document.getElementById("themeOptions").classList.toggle("show");
 }
 
-function renderStories() {
-  const box = document.getElementById("stories");
-  const search = document.getElementById("searchInput")
-    .value.trim().toLowerCase();
+function setTheme(theme){
+  document.body.className=theme;
+  localStorage.setItem("ajStoryTheme",theme);
+  document.getElementById("themeOptions").classList.remove("show");
+}
 
-  const filtered = allStories.filter(story => {
-    const categoryMatch =
-      selectedCategory === "सबै कथा" ||
-      story.category === selectedCategory;
+const savedTheme=localStorage.getItem("ajStoryTheme");
+if(savedTheme!==null) document.body.className=savedTheme;
 
-    const searchMatch =
-      story.title.toLowerCase().includes(search) ||
-      story.category.toLowerCase().includes(search);
+function renderCategories(){
+  const box=document.getElementById("categories");
+  const all=["सबै कथा",...categories];
 
-    return categoryMatch && searchMatch;
-  });
+  box.innerHTML=all.map(cat=>`
+    <button class="cat-btn ${activeCategory===cat?"active":""}"
+      onclick="selectCategory('${cat}')">${cat==="सबै कथा"?"📚 ":""}${cat}</button>
+  `).join("");
+}
 
-  document.getElementById("listTitle").textContent =
-    selectedCategory === "सबै कथा"
-      ? "❤️ लोकप्रिय कथाहरू"
-      : "📖 " + selectedCategory;
+function selectCategory(category){
+  activeCategory=category;
+  favoriteMode=false;
+  renderCategories();
+  renderStories();
+}
 
-  box.innerHTML = "";
+function showFavorites(){
+  favoriteMode=true;
+  activeCategory="मनपर्ने";
+  renderCategories();
+  renderStories();
+}
 
-  filtered.forEach((story,index) => {
-    const card = document.createElement("div");
-    card.className = "story-card";
-
-    const icon = document.createElement("div");
-    icon.className = "story-icon";
-    icon.textContent = categoryIcons[
-      categoryNames.indexOf(story.category)
-    ];
-
-    const heading = document.createElement("h3");
-    heading.textContent = "✨ " + story.title;
-
-    const category = document.createElement("div");
-    category.className = "story-category";
-    category.textContent = story.category;
-
-    const preview = document.createElement("p");
-    preview.textContent = story.text.slice(0,125) + "...";
-
-    const more = document.createElement("span");
-    more.className = "read-more";
-    more.textContent = "📖 पूरा कथा पढ्नुहोस्";
-
-    card.append(icon,heading,category,preview,more);
-    card.onclick = () => openStory(story);
-    box.appendChild(card);
-  });
-
-  if(filtered.length === 0) {
-    const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.textContent = "😔 माफ गर्नुहोस्, कथा भेटिएन।";
-    box.appendChild(empty);
+function toggleFavorite(id){
+  if(favorites.includes(id)){
+    favorites=favorites.filter(x=>x!==id);
+  }else{
+    favorites.push(id);
   }
+
+  localStorage.setItem("ajStoryFavorites",JSON.stringify(favorites));
+  renderStories();
 }
 
-function openStory(story) {
-  document.getElementById("readerTitle").textContent =
-    "🌸 " + story.title;
+function renderStories(){
+  const grid=document.getElementById("storyGrid");
+  const query=document.getElementById("searchInput").value.trim().toLowerCase();
 
-  document.getElementById("readerText").textContent =
-    story.text;
+  let list=storyData.filter(story=>{
+    const categoryMatch=
+      activeCategory==="सबै कथा" ||
+      activeCategory==="मनपर्ने" ||
+      story.category===activeCategory;
 
-  document.getElementById("reader").style.display = "block";
-  document.body.style.overflow = "hidden";
+    const favoriteMatch=
+      !favoriteMode || favorites.includes(story.id);
+
+    const searchMatch=
+      story.title.toLowerCase().includes(query) ||
+      story.full.toLowerCase().includes(query) ||
+      story.category.toLowerCase().includes(query);
+
+    return categoryMatch && favoriteMatch && searchMatch;
+  });
+
+  document.getElementById("storyCount").textContent=
+    "📖 "+list.length+" वटा कथा भेटिए";
+
+  if(list.length===0){
+    grid.innerHTML=`<div class="empty">😔 कुनै कथा भेटिएन।</div>`;
+    return;
+  }
+
+  grid.innerHTML=list.map(story=>`
+    <article class="story-card">
+      <div class="story-top">
+        <span class="story-category">${story.category}</span>
+        <button class="heart"
+          onclick="toggleFavorite('${story.id}')"
+          title="मनपर्नेमा राख्नुहोस्">
+          ${favorites.includes(story.id)?"❤️":"🤍"}
+        </button>
+      </div>
+
+      <h3>📘 ${story.title}</h3>
+      <p>${story.intro} ${story.middle}</p>
+
+      <button class="read-btn"
+        onclick="openStory('${story.id}')">
+        📖 पूरा कथा पढ्नुहोस्
+      </button>
+    </article>
+  `).join("");
 }
 
-function closeStory() {
-  document.getElementById("reader").style.display = "none";
-  document.body.style.overflow = "auto";
+function openStory(id){
+  const story=storyData.find(s=>s.id===id);
+  if(!story)return;
+
+  document.getElementById("modalTitle").textContent=story.title;
+  document.getElementById("modalStory").textContent=story.full;
+  document.getElementById("storyModal").classList.add("show");
+  document.body.style.overflow="hidden";
 }
 
-function toggleTheme() {
-  document.body.classList.toggle("dark");
-
-  const dark = document.body.classList.contains("dark");
-
-  localStorage.setItem("kathaTheme",dark ? "dark" : "light");
-
-  document.getElementById("themeButton").textContent =
-    dark ? "☀️ Light Mode" : "🌙 Dark Mode";
+function closeModal(){
+  document.getElementById("storyModal").classList.remove("show");
+  document.body.style.overflow="";
 }
 
-if(localStorage.getItem("kathaTheme") === "dark") {
-  document.body.classList.add("dark");
-  document.getElementById("themeButton").textContent =
-    "☀️ Light Mode";
+function closeOutside(event){
+  if(event.target.id==="storyModal") closeModal();
 }
 
 renderCategories();
 renderStories();
+
 </script>
 
 </body>
