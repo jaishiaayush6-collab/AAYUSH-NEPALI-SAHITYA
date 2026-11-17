@@ -1,1 +1,859 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AJ नेपाली साहित्य | उपन्यास</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+--bg:#f6f3fc;
+--card:#fff;
+--text:#29203d;
+--muted:#898198;
+--primary:#8054df;
+--pink:#e94f9c;
+--border:#eae3f4;
+--shadow:0 10px 35px #39215c12;
+}
+
+body.dark{
+--bg:#12101d;
+--card:#211c30;
+--text:#f8f3ff;
+--muted:#b9afca;
+--border:#393047;
+--shadow:0 10px 35px #0003;
+}
+
+body{
+font-family:'Noto Sans Devanagari',sans-serif;
+background:var(--bg);
+color:var(--text);
+transition:.3s;
+}
+
+button,input,select{font-family:inherit}
+
+header{
+background:
+radial-gradient(circle at 85% 10%,#f16ab755,transparent 28%),
+linear-gradient(135deg,#17102d,#442477,#8752c7);
+color:white;
+padding:25px 6% 45px;
+}
+
+nav{
+max-width:1250px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+}
+
+.logo{font-size:22px;font-weight:800}
+.logo span{color:#ffb7dc}
+
+.theme-btn{
+border:1px solid #ffffff55;
+background:#ffffff18;
+color:white;
+padding:11px 17px;
+border-radius:30px;
+cursor:pointer;
+transition:.3s;
+}
+
+.theme-btn:hover{
+background:#ffffff35;
+transform:translateY(-2px);
+}
+
+.hero{
+max-width:1250px;
+margin:55px auto 0;
+}
+
+.badge{
+display:inline-block;
+padding:8px 16px;
+border-radius:30px;
+background:#ffffff20;
+font-size:12px;
+}
+
+.hero h1{
+font-size:clamp(32px,5vw,57px);
+margin:22px 0 12px;
+line-height:1.5;
+}
+
+.hero h1 span{
+background:linear-gradient(90deg,#ffb4d8,#ffe4a9);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.hero p{
+max-width:700px;
+line-height:2;
+color:#e8ddf8;
+}
+
+main{
+max-width:1250px;
+margin:35px auto;
+padding:0 20px;
+}
+
+.welcome{
+padding:23px;
+border-radius:20px;
+background:var(--card);
+border:1px solid var(--border);
+box-shadow:var(--shadow);
+margin-bottom:25px;
+}
+
+.welcome h2{margin-bottom:10px;font-size:20px}
+
+.welcome p{
+color:var(--muted);
+line-height:1.9;
+font-size:14px;
+}
+
+.search-area{
+display:flex;
+gap:12px;
+margin-bottom:20px;
+flex-wrap:wrap;
+}
+
+.search-area input,
+.search-area select{
+background:var(--card);
+color:var(--text);
+border:1px solid var(--border);
+border-radius:14px;
+padding:14px;
+font-size:14px;
+outline:none;
+}
+
+.search-area input{flex:1;min-width:220px}
+
+.search-area input:focus{
+border-color:var(--primary);
+box-shadow:0 0 0 4px #8054df18;
+}
+
+.categories{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:8px 2px 18px;
+scrollbar-width:thin;
+}
+
+.category{
+white-space:nowrap;
+padding:12px 18px;
+border:1px solid var(--border);
+background:var(--card);
+color:var(--text);
+border-radius:30px;
+cursor:pointer;
+transition:.3s;
+}
+
+.category:hover,
+.category.active{
+background:linear-gradient(110deg,var(--primary),var(--pink));
+color:white;
+border-color:transparent;
+transform:translateY(-2px);
+}
+
+.section-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:12px;
+margin:20px 0;
+}
+
+.section-title h2{font-size:23px}
+
+.count{
+background:#8054df18;
+color:var(--primary);
+padding:9px 15px;
+border-radius:30px;
+font-size:13px;
+}
+
+.book-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:20px;
+}
+
+.book{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:20px;
+overflow:hidden;
+box-shadow:var(--shadow);
+transition:.3s;
+animation:appear .4s ease;
+}
+
+@keyframes appear{
+from{opacity:0;transform:translateY(15px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+.book:hover{
+transform:translateY(-7px);
+box-shadow:0 18px 40px #8054df25;
+}
+
+.cover{
+height:190px;
+padding:17px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+color:white;
+position:relative;
+overflow:hidden;
+}
+
+.cover:after{
+content:"✦";
+position:absolute;
+right:8px;
+bottom:-45px;
+font-size:140px;
+color:#ffffff19;
+}
+
+.cover-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1;
+}
+
+.cover-icon{font-size:25px}
+
+.fav{
+width:36px;
+height:36px;
+border:0;
+border-radius:50%;
+background:#ffffff30;
+color:white;
+font-size:20px;
+cursor:pointer;
+}
+
+.cover h3{
+font-size:20px;
+line-height:1.7;
+z-index:1;
+}
+
+.cover small{z-index:1;opacity:.9}
+
+.book-info{padding:16px}
+
+.book-info p{
+color:var(--muted);
+font-size:13px;
+line-height:1.9;
+min-height:65px;
+}
+
+.book-meta{
+display:flex;
+justify-content:space-between;
+color:var(--muted);
+font-size:12px;
+margin:14px 0;
+}
+
+.read-btn{
+width:100%;
+border:0;
+padding:12px;
+border-radius:12px;
+color:white;
+background:linear-gradient(110deg,var(--primary),var(--pink));
+cursor:pointer;
+transition:.3s;
+}
+
+.read-btn:hover{
+transform:scale(1.03);
+filter:brightness(1.1);
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:#080512dd;
+backdrop-filter:blur(8px);
+z-index:100;
+display:none;
+align-items:center;
+justify-content:center;
+padding:15px;
+}
+
+.modal.show{display:flex}
+
+.reader{
+background:var(--card);
+color:var(--text);
+width:min(850px,100%);
+max-height:92vh;
+overflow:auto;
+border-radius:23px;
+}
+
+.reader-header{
+padding:25px;
+background:linear-gradient(120deg,#382063,#8550c0,#e6539e);
+color:white;
+position:sticky;
+top:0;
+}
+
+.reader-header h2{margin:15px 0}
+
+.close{
+float:right;
+padding:9px 15px;
+border:0;
+border-radius:10px;
+background:#ffffff30;
+color:white;
+cursor:pointer;
+}
+
+.reader-body{
+padding:25px;
+line-height:2.2;
+text-align:justify;
+}
+
+.reader-body h3{
+color:var(--primary);
+margin:25px 0 12px;
+}
+
+.reader-body p{margin-bottom:17px}
+
+.notice{
+background:#8054df15;
+border-left:4px solid var(--primary);
+padding:14px;
+border-radius:9px;
+font-size:13px;
+margin-bottom:20px;
+}
+
+footer{
+margin-top:60px;
+padding:40px 15px;
+text-align:center;
+color:white;
+background:linear-gradient(120deg,#19132e,#482778);
+}
+
+footer h2{margin-bottom:12px}
+footer p{color:#ddd0ef;line-height:2;font-size:13px}
+
+@media(max-width:600px){
+
+header{padding:20px 17px 35px}
+.logo{font-size:17px}
+.hero{margin-top:38px}
+.hero h1{font-size:34px}
+.hero p{font-size:13px}
+
+.book-grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:11px;
+}
+
+.cover{height:155px;padding:11px}
+.cover h3{font-size:15px}
+.book-info{padding:11px}
+.book-info p{font-size:11px;min-height:75px}
+.book-meta{font-size:10px}
+.read-btn{font-size:12px}
+.section-title h2{font-size:19px}
+.reader-body{padding:17px}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<nav>
+<div class="logo">✦ AJ <span>नेपाली साहित्य</span></div>
+
+<button class="theme-btn" id="themeBtn" onclick="toggleTheme()">
+🌙 Dark Mode
+</button>
+</nav>
+
+<div class="hero">
+
+<div class="badge">✨ नेपाली साहित्यको डिजिटल संसार</div>
+
+<h1>स्वागत छ <span>उपन्यास संसारमा</span> 📚</h1>
+
+<p>
+कथा, कल्पना, प्रेम, इतिहास, रहस्य र विज्ञानका
+सुन्दर साहित्यिक यात्राहरू पढ्नुहोस्।
+आफ्नो मनपर्ने उपन्यास छान्नुहोस् र पढ्न सुरु गर्नुहोस्।
+</p>
+
+</div>
+</header>
+
+<main>
+
+<div class="welcome">
+<h2>🌸 साहित्यको संसारमा स्वागत छ!</h2>
+<p>
+यहाँ विभिन्न विधाका नमुना उपन्यासहरू पढ्न सक्नुहुन्छ।
+नयाँ कथा पढ्नुहोस्, नयाँ विचार सिक्नुहोस् र साहित्यिक
+कल्पनाको यात्रामा अघि बढ्नुहोस्।
+</p>
+</div>
+
+<div class="search-area">
+
+<input id="search"
+placeholder="🔍 उपन्यास खोज्नुहोस्..."
+oninput="render()">
+
+<select id="sort" onchange="render()">
+<option value="default">क्रमअनुसार</option>
+<option value="az">नामअनुसार</option>
+</select>
+
+</div>
+
+<div class="categories" id="categories"></div>
+
+<div class="section-title">
+<h2 id="heading">📚 सबै उपन्यास</h2>
+<span class="count" id="count"></span>
+</div>
+
+<div class="book-grid" id="books"></div>
+
+</main>
+
+<footer>
+<h2>✦ AJ नेपाली साहित्य</h2>
+<p>📚 Learn • Read • Create • Inspire</p>
+<p>© 2026 AJ नेपाली साहित्य</p>
+</footer>
+
+<div class="modal" id="modal">
+
+<div class="reader">
+
+<div class="reader-header">
+<button class="close" onclick="closeReader()">✕ बन्द</button>
+<small id="genre"></small>
+<h2 id="title"></h2>
+<small>📖 नमुना उपन्यास</small>
+</div>
+
+<div class="reader-body" id="content"></div>
+
+</div>
+</div>
+
+<script>
+
+const categories={
+
+"सामाजिक उपन्यास":[
+"गाउँको अन्तिम चिठी","समयको ऐना","आँगनको उज्यालो","परदेशिएको सपना",
+"माटोको सुगन्ध","नयाँ बिहान","आमाको प्रतीक्षा","फर्किने बाटो",
+"सम्बन्धका धागा","सहरभित्रको गाउँ","अधुरो आकाश","जीवनको मोड",
+"आफ्नै मान्छे","चौतारीको कथा","घर फर्कने दिन","बदलिँदो समाज",
+"सुनसान बस्ती","नयाँ पुस्ता","आशाको दियो","सम्झनाको घर"
+],
+
+"प्रेम उपन्यास":[
+"पहिलो भेट","तिमी र म","मनको मौसम","अधुरो प्रेमपत्र",
+"वर्षात्को सम्झना","दुई मुटुको बाटो","नबोलेका कुरा","प्रतीक्षाको फूल",
+"मायाको आकाश","फर्केर आउनेछौ","चन्द्रमाको साक्षी","सम्झनामा तिमी",
+"मनको चौतारी","अनकही प्रेमकथा","सपनाको किनार","मौन सम्बन्ध",
+"तिम्रो नाम","दूरीका पल","फूलजस्तै माया","अन्तिम वाचा"
+],
+
+"ऐतिहासिक उपन्यास":[
+"इतिहासको पदचाप","पुरानो दरबार","वीरको गाथा","समयका साक्षी",
+"राज्यको रहस्य","युद्धपछिको बिहान","विरासत","ढुंगामा लेखिएको कथा",
+"प्राचीन नगर","राजमुकुटको भार","सीमापारिको इतिहास","अमर योद्धा",
+"दरबारको चिठी","हराएको राज्य","पुरानो अभिलेख","वीरांगनाको यात्रा",
+"इतिहासको मोड","कालखण्ड","राज्यको सपना","अतीतको आवाज"
+],
+
+"रहस्य तथा रोमाञ्चक उपन्यास":[
+"रातको संकेत","बन्द कोठाको रहस्य","हराएको डायरी","अपरिचित छाया",
+"तेस्रो ढोका","नदीपारिको घर","अन्तिम सन्देश","घडीको आवाज",
+"कुहिरोभित्रको बाटो","नदेखिएको पाहुना","पुरानो नक्सा","मध्यरातको फोन",
+"कालो बाकस","गोप्य सुरुङ","सुनसान स्टेशन","रहस्यमय गाउँ",
+"हराएको तस्बिर","छायाको पछाडि","अज्ञात यात्रु","अन्तिम प्रमाण"
+],
+
+"काल्पनिक तथा विज्ञान उपन्यास":[
+"तारापारिको यात्रा","भविष्यको सहर","समयको ढोका","अन्तरिक्षका यात्री",
+"कृत्रिम चेतना","हरियो ग्रह","अर्को संसार","रोबोटको सपना",
+"समययन्त्र","ऊर्जाको रहस्य","चन्द्रबस्ती","अदृश्य संसार",
+"तारामण्डलको सन्देश","भविष्यको नेपाल","नयाँ ग्रहको बिहान",
+"डिजिटल चेतना","आकाशपारिको बस्ती","समयको यात्रु",
+"अन्तरिक्ष स्टेशन","मानवपछिको युग"
+]
+
+};
+
+const suffix=[
+"को रहस्य","को यात्रा","को सपना","को खोजी","को निर्णय"
+];
+
+Object.keys(categories).forEach(cat=>{
+
+let original=[...categories[cat]];
+let i=0;
+
+while(categories[cat].length<100){
+
+let name=original[i%original.length]+" "+
+suffix[Math.floor(i/original.length)%5];
+
+if(!categories[cat].includes(name)){
+categories[cat].push(name);
+}
+
+i++;
+
+}
+
+});
+
+const icons=["🌸","❤️","🏛️","🔍","🚀"];
+
+const colors=[
+"linear-gradient(135deg,#382063,#8054df)",
+"linear-gradient(135deg,#872957,#e94f9c)",
+"linear-gradient(135deg,#075b66,#36a69b)",
+"linear-gradient(135deg,#293d72,#6389d7)",
+"linear-gradient(135deg,#604080,#a36bc1)"
+];
+
+let books=[];
+let active="सबै";
+
+let favs=JSON.parse(
+localStorage.getItem("aj_favs")||"[]"
+);
+
+let favMode=false;
+
+Object.keys(categories).forEach((cat,ci)=>{
+
+categories[cat].forEach((title,i)=>{
+
+books.push({
+id:ci+"-"+i,
+title,
+cat,
+i,
+ci
+});
+
+});
+
+});
+
+function makeCategories(){
+
+let html=`
+<button class="category ${active==="सबै"?"active":""}"
+onclick="selectCategory('सबै')">
+🌟 सबै
+</button>`;
+
+Object.keys(categories).forEach(cat=>{
+
+html+=`
+<button class="category ${active===cat?"active":""}"
+onclick="selectCategory('${cat}')">
+${cat}
+</button>`;
+
+});
+
+document.getElementById("categories").innerHTML=html;
+
+}
+
+function selectCategory(cat){
+
+active=cat;
+favMode=false;
+
+makeCategories();
+render();
+
+}
+
+function render(){
+
+let q=document.getElementById("search").value.toLowerCase();
+
+let list=books.filter(b=>
+
+(active==="सबै"||b.cat===active)&&
+(!favMode||favs.includes(b.id))&&
+(b.title+" "+b.cat).toLowerCase().includes(q)
+
+);
+
+if(document.getElementById("sort").value==="az"){
+
+list.sort((a,b)=>a.title.localeCompare(b.title,"ne"));
+
+}
+
+document.getElementById("heading").innerText=
+
+favMode?"❤️ मनपर्ने उपन्यास":
+"📚 "+(active==="सबै"?"सबै उपन्यास":active);
+
+document.getElementById("count").innerText=
+list.length+" वटा उपन्यास";
+
+document.getElementById("books").innerHTML=list.length?
+
+list.map(b=>`
+
+<div class="book">
+
+<div class="cover" style="background:${colors[b.ci]}">
+
+<div class="cover-top">
+
+<span class="cover-icon">${icons[b.ci]}</span>
+
+<button class="fav" onclick="toggleFav('${b.id}')">
+${favs.includes(b.id)?"♥":"♡"}
+</button>
+
+</div>
+
+<h3>${b.title}</h3>
+
+<small>${b.cat}</small>
+
+</div>
+
+<div class="book-info">
+
+<p>
+${b.cat} विधामा आधारित साहित्यिक नमुना।
+रोचक कथा र नयाँ विचारको अनुभव लिनुहोस्।
+</p>
+
+<div class="book-meta">
+<span>📖 नमुना ${b.i+1}</span>
+<span>✨ साहित्य</span>
+</div>
+
+<button class="read-btn" onclick="openReader('${b.id}')">
+पढ्न सुरु गर्नुहोस् →
+</button>
+
+</div>
+</div>
+
+`).join("")
+
+:"<p>🔍 उपन्यास भेटिएन।</p>";
+
+}
+
+function toggleFav(id){
+
+favs=favs.includes(id)?
+favs.filter(x=>x!==id):[...favs,id];
+
+localStorage.setItem("aj_favs",JSON.stringify(favs));
+
+render();
+
+}
+
+function showFavorites(){
+
+favMode=!favMode;
+active="सबै";
+
+makeCategories();
+render();
+
+}
+
+function toggleTheme(){
+
+document.body.classList.toggle("dark");
+
+let dark=document.body.classList.contains("dark");
+
+localStorage.setItem("aj_theme",dark?"dark":"light");
+
+document.getElementById("themeBtn").innerText=
+dark?"☀️ Light Mode":"🌙 Dark Mode";
+
+}
+
+if(localStorage.getItem("aj_theme")==="dark"){
+
+document.body.classList.add("dark");
+
+document.getElementById("themeBtn").innerText=
+"☀️ Light Mode";
+
+}
+
+function openReader(id){
+
+let b=books.find(x=>x.id===id);
+
+document.getElementById("title").innerText=b.title;
+document.getElementById("genre").innerText=b.cat;
+
+let content=`
+
+<div class="notice">
+✨ यो अध्ययन र साहित्यिक अभ्यासका लागि तयार गरिएको नमुना उपन्यास हो।
+</div>
+
+<p>
+<b>${b.title}</b> एउटा ${b.cat} विधामा आधारित नमुना उपन्यास हो।
+यस कथाले जीवन, समाज, भावना र अनुभवका विभिन्न पक्षलाई
+साहित्यिक दृष्टिकोणबाट प्रस्तुत गर्ने प्रयास गर्छ।
+</p>
+
+`;
+
+let chapters=[
+"नयाँ सुरुवात",
+"जीवनको अर्को मोड",
+"आशाको नयाँ बिहान"
+];
+
+chapters.forEach((chapter,i)=>{
+
+content+=`<h3>अध्याय ${i+1}: ${chapter}</h3>`;
+
+for(let p=0;p<7;p++){
+
+content+=`
+
+<p>
+नयाँ बिहानको सुरुवातसँगै पात्रको मनमा अनेकौँ विचारहरू
+जन्मिरहेका थिए। उसले विगतका अनुभवहरू सम्झँदै भविष्यका
+सम्भावनाहरूबारे सोच्न थाल्यो।
+
+जीवनमा हरेक दिन नयाँ अवसर लिएर आउँछ। कहिले परिस्थितिले
+मानिसलाई चुनौती दिन्छ भने कहिले सामान्य घटनाले पनि
+जीवनमा ठूलो परिवर्तन ल्याउँछ।
+
+उसले आफ्नो वरिपरिको वातावरणलाई ध्यानपूर्वक नियाल्यो।
+मानिसहरूको व्यवहार, उनीहरूको सपना र जीवनका संघर्षहरू
+बुझ्ने प्रयास गर्‍यो।
+
+त्यसपछि उसले एउटा नयाँ निर्णय गर्‍यो। अब ऊ आफ्नो उद्देश्य
+प्रति अझ जिम्मेवार बन्नेछ र प्रत्येक कठिनाइलाई नयाँ
+अनुभवका रूपमा स्वीकार गर्नेछ।
+
+उसको यात्रामा अझै धेरै प्रश्नहरू थिए। तर ती प्रश्नहरूको
+उत्तर खोज्ने साहस पनि ऊभित्र बढ्दै गइरहेको थियो।
+</p>
+
+`;
+
+}
+
+});
+
+content+=`
+
+<h3>✨ कथाको सन्देश</h3>
+
+<p>
+आशा, धैर्य, विश्वास र निरन्तर प्रयासले जीवनलाई नयाँ
+दिशा दिन सक्छ। हरेक अनुभवबाट सिक्दै अघि बढ्नु नै
+जीवनको सुन्दर यात्रा हो।
+</p>
+
+`;
+
+document.getElementById("content").innerHTML=content;
+
+document.getElementById("modal").classList.add("show");
+
+document.body.style.overflow="hidden";
+
+}
+
+function closeReader(){
+
+document.getElementById("modal").classList.remove("show");
+
+document.body.style.overflow="auto";
+
+}
+
+document.getElementById("modal").onclick=function(e){
+
+if(e.target===this)closeReader();
+
+};
+
+document.addEventListener("keydown",e=>{
+
+if(e.key==="Escape")closeReader();
+
+});
+
+makeCategories();
+render();
+
+</script>
+
+</body>
+</html>
